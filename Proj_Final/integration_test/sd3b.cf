@@ -1,0 +1,13 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd3b.cf
+
+;Introduction:
+; front hallway
+; Left door
+; with a period of 100 milliseconds
+; verbose option set to TRUE.
+
+DoorControl FRONT LEFT 100ms TRUE
+DriveControl 100ms TRUE

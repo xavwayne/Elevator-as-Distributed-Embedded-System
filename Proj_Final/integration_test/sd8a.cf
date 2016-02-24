@@ -1,0 +1,9 @@
+; 18649 <fall-2015>
+; group 3 - Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd8a.cf
+
+DriveControl 10ms false
+Dispatcher 8 50ms false
+DoorControl FRONT LEFT 10ms false
+DoorControl FRONT RIGHT 10ms false
+CarPositionControl 50ms false

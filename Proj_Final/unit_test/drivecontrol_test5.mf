@@ -1,0 +1,59 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+; drivecontrol_test5.mf
+
+;TODO  add test statements
+
+#INCLUDE defines2.mf ;include CAN ids and period definitions
+
+;initialize
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID  AtFloor 4 FRONT = true    
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+0s  I  MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID SafetySensor = false
+0s  I  MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 100
+0s  I  MESSAGE_PERIOD F DriveSpeed = STOP 0
+
+;check state S6.1
+;#state 'S6.1 STOP'
+0.21s A S DriveControl : STATE == STATE_STOP
+0.21s A  F Drive : speed == STOP
+0.21s A  F Drive : direction == STOP
+0.21s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+0.21s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
+0.21s A  N DRIVE_SPEED_CAN_ID NewInteger : getValue == 0
+
+;set for T6.8
+;#transition 'T6.8'
+0.41s  I  MESSAGE_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
+0.41s  I  MESSAGE_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
+
+0.45s  I  MESSAGE_PERIOD F DriveSpeed = DOWN 0.05
+
+;check state S6.6
+;#state 'S6.6 LEVEL_DOWN'
+0.51s A S DriveControl : STATE == STATE_LEVEL_DOWN
+0.51s A  F Drive : speed == LEVEL
+0.51s A  F Drive : direction == DOWN
+0.51s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
+0.51s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
+0.51s A  N DRIVE_SPEED_CAN_ID NewInteger : getValue == 50
+
+
+;set for T6.12
+;#transition 'T6.12'
+0.61s  I  MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID SafetySensor = true
+
+0.65s  I MESSAGE_PERIOD  F DriveSpeed = STOP 0
+
+;check state S6.4
+;#state 'S6.4 EMERGENCY'
+0.71s A S DriveControl : STATE == STATE_EMERGENCY
+0.71s A  F Drive : speed == STOP
+0.71s A  F Drive : direction == STOP
+0.71s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+0.71s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
+0.71s A  N DRIVE_SPEED_CAN_ID NewInteger : getValue == 0

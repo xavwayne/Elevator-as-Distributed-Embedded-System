@@ -1,0 +1,35 @@
+; 18649 <fall-2015>
+; group 3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+
+Simulator Parameters:
+Command line = -cf carbuttoncontrol.cf -mf carbuttoncontrol_test1.mf
+RandomSeed = 1445035947169
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = carbuttoncontrol_test1.mf
+Controller File = carbuttoncontrol.cf
+
+Assertion Results:
+@0.21s:  PASSED CarButtonControl[3][FRONT]::checkState(STATE) ?== STATE_LIGHT_OFF PASSED
+@0.21s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@29453f44 :: lighted ?== false PASSED
+@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6e0be858 :: getValue ?== false PASSED
+@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@610455d6 :: getValue ?== false PASSED
+@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@60e53b93 :: getValue ?== false PASSED
+@1.21s:  PASSED CarButtonControl[3][FRONT]::checkState(STATE) ?== STATE_LIGHT_ON PASSED
+@1.21s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@266474c2 :: lighted ?== true PASSED
+@1.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5e481248 :: getValue ?== true PASSED
+@1.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@63947c6b :: getValue ?== true PASSED
+@2.41s:  PASSED CarButtonControl[3][FRONT]::checkState(STATE) ?== STATE_LIGHT_OFF PASSED
+@2.41s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@4dc63996 :: lighted ?== false PASSED
+@2.41s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6ff3c5b5 :: getValue ?== false PASSED
+@2.41s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4b1210ee :: getValue ?== false PASSED
+
+
+******************Summary******************
+Passed:  13
+Failed:  0
+Total :  13
+

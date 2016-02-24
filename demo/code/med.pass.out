@@ -1,0 +1,148 @@
+Simulator Parameters:
+Command line = -b 200 -fs 5 -monitor GradingMonitor -pf med.pass
+RandomSeed = 1449525976230
+CanNetworkBitTime = 5000 ns
+Effective Can Bitrate = 199999.99999999997
+Run Time = null
+Real time rate = null
+Acceptance Test File = med.pass
+Monitors: GradingMonitor  
+
+
+[Elevator] @0.000000000: Starting Simulation
+[Elevator] @60.000000000: Progress indicator
+[Elevator] @120.000000000: Progress indicator
+[Elevator] @180.000000000: Progress indicator
+[Elevator] @240.000000000: Progress indicator
+[Elevator] @300.000000000: Progress indicator
+[Elevator] @360.000000000: Progress indicator
+[Elevator] @420.000000000: Progress indicator
+[Elevator] @480.000000000: Progress indicator
+[Elevator] @540.000000000: Progress indicator
+[Elevator] @600.000000000: Progress indicator
+[Elevator] @660.000000000: Progress indicator
+[Elevator] @720.000000000: Progress indicator
+[Elevator] @780.000000000: Progress indicator
+[Elevator] @840.000000000: Progress indicator
+[Elevator] @900.000000000: Progress indicator
+[Elevator] @960.000000000: Progress indicator
+[Elevator] @1020.000000000: Progress indicator
+[Elevator] @1080.000000000: Progress indicator
+[Elevator] @1140.000000000: Progress indicator
+[Elevator] @1200.000000000: Progress indicator
+[Elevator] @1260.000000000: Progress indicator
+[Elevator] @1320.000000000: Progress indicator
+[Elevator] @1380.000000000: Progress indicator
+[Elevator] @1440.000000000: Progress indicator
+[Elevator] @1500.000000000: Progress indicator
+[Elevator] @1560.000000000: Progress indicator
+[Elevator] @1620.000000000: Progress indicator
+[Elevator] @1680.000000000: Progress indicator
+[Elevator] @1740.000000000: Progress indicator
+[Elevator] @1800.000000000: Progress indicator
+[Elevator] @1860.000000000: Progress indicator
+[Elevator] @1920.000000000: Progress indicator
+[Elevator] @1980.000000000: Progress indicator
+[Elevator] @2040.000000000: Progress indicator
+[Elevator] @2100.000000000: Progress indicator
+[Elevator] @2160.000000000: Progress indicator
+[Elevator] @2220.000000000: Progress indicator
+[Elevator] @2280.000000000: Progress indicator
+[Elevator] @2340.000000000: Progress indicator
+[Elevator] @2400.000000000: Progress indicator
+[Elevator] @2460.000000000: Progress indicator
+[Elevator] @2520.000000000: Progress indicator
+[Elevator] @2580.000000000: Progress indicator
+[Elevator] @2640.000000000: Progress indicator
+[Elevator] @2700.000000000: Progress indicator
+[Elevator] @2760.000000000: Progress indicator
+[Elevator] @2820.000000000: Progress indicator
+[Elevator] @2880.000000000: Progress indicator
+[Elevator] @2940.000000000: Progress indicator
+[Elevator] @3000.000000000: Progress indicator
+[Elevator] @3060.000000000: Progress indicator
+[Elevator] @3120.000000000: Progress indicator
+[Elevator] @3180.000000000: Progress indicator
+[Elevator] @3240.000000000: Progress indicator
+[Elevator] @3300.000000000: Progress indicator
+[Elevator] @3360.000000000: Progress indicator
+[Elevator] @3420.000000000: Progress indicator
+[Elevator] @3480.000000000: Progress indicator
+[Elevator] @3540.000000000: Progress indicator
+[Elevator] @3600.000000000: Progress indicator
+[Elevator] @3660.000000000: Progress indicator
+[Elevator] @3720.000000000: Progress indicator
+[Elevator] @3780.000000000: Progress indicator
+[Elevator] @3840.000000000: Progress indicator
+[Elevator] @3900.000000000: Progress indicator
+[Elevator] @3960.000000000: Progress indicator
+[Elevator] @4020.000000000: Progress indicator
+[Elevator] @4080.000000000: Progress indicator
+[Elevator] @4140.000000000: Progress indicator
+[Elevator] @4200.000000000: Progress indicator
+[Elevator] @4260.000000000: Progress indicator
+[Elevator] @4320.000000000: Progress indicator
+[Elevator] @4380.000000000: Progress indicator
+[Elevator] @4440.000000000: Progress indicator
+[Elevator] @4500.000000000: Progress indicator
+[Elevator] @4560.000000000: Progress indicator
+[Elevator] @4620.000000000: Progress indicator
+[Elevator] @4680.000000000: Progress indicator
+[Elevator] @4740.000000000: Progress indicator
+[Elevator] @4800.000000000: Progress indicator
+[Elevator] @4860.000000000: Progress indicator
+[Elevator] @4920.000000000: Progress indicator
+[Elevator] @4980.000000000: Progress indicator
+[Elevator] @5040.000000000: Progress indicator
+[Elevator] @5100.000000000: Progress indicator
+[Elevator] @5160.000000000: Progress indicator
+[Elevator] @5220.000000000: Progress indicator
+[Elevator] @5280.000000000: Progress indicator
+[Elevator] @5340.000000000: Progress indicator
+[Elevator] @5400.000000000: Progress indicator
+[Elevator] @5460.000000000: Progress indicator
+[Elevator] @5520.000000000: Progress indicator
+[Elevator] @5580.000000000: Progress indicator
+[Elevator] @5640.000000000: Progress indicator
+[Elevator] @5700.000000000: Progress indicator
+[Elevator] @5760.000000000: Progress indicator
+[Elevator] @5811.175000000: Simulation Finished
+
+Network Utilization Summary:
+Recent: 76.47 % Max: 76.47 %  Overall:  76.47 %
+
+Monitors Warning Results: 
+RuntimeMonitor generated 0 warnings.
+
+Monitors Summmary Results: 
+0 RT-6 violations
+-1 RT-7 violations
+0 RT-8.1 violations
+0 RT-8.2 violations
+0 RT-8.3 violations
+0 RT-9 violations
+
+STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
+-----------------------------------------------------
+
+
+Passenger Delivery Summary
+Delivered: 50
+Stranded: 0
+Total: 50
+
+Deliver Stats (lower is better):
+Average_delivery_time: 37.882
+Maximum_delivery_time:  88.673
+Delivery_performance_score:  240.202
+
+Satisfaction Stats (higher is better):
+Average_satisfaction_score: 100.000
+Min_satisfaction_score:  100.000
+Satisfaction_performance_score:  500.000
+
+
+
+5811.175s simulation seconds
+ 42.731 real seconds
+ effective rate 135.99

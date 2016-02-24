@@ -1,0 +1,48 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+; sd8b_test1.mf
+
+;TODO  add test statements
+
+#INCLUDE defines2.mf ;include CAN ids and period definitions
+
+;initiate
+0s I ONCE N CAR_POSITION_CAN_ID NewInteger = 1
+
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID  AtFloor 3 FRONT = true    
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = true
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = false
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = false
+
+0.11s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0.11s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+0.11s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+0.11s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
+
+0.21s I ONCE N CAR_CALL_[3][FRONT]_CAN_ID NewBoolean = true
+
+;initialize complete
+
+
+;#arc '8B/1'
+0.31s I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID  AtFloor 3 FRONT = false
+
+;#arc '8B/2a', #arc '8B/2b'
+0.41s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+0.45s  I  MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID SafetySensor = true
+
+;#arc '8B/3a'
+0.51s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+
+;#arc '8B/3b'
+0.51s A F Drive : speed == STOP
+0.51s A F Drive : direction == STOP
+

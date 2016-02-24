@@ -1,0 +1,80 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd2a_test2.mf
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+;no car call for 3rd floor
+0s  I  MESSAGE_PERIOD F CarCall 4 FRONT  = false            
+;door closed  
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = true
+;not at the third floor  
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID  AtFloor 4 FRONT = false    
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID  AtFloor 3 FRONT = false
+
+0s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 UP FRONT	; this transitor donot have a constructor
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+0s  I  MESSAGE_PERIOD N DESIRED_DWELL_[FRONT]_CAN_ID NewInteger = 2000
+0s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 20
+
+
+;#transition 'T5.4'
+0.2s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
+0.2s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 0
+0.2s  I ONCE F CarCall 3 FRONT = true
+
+;#state 'S5.1 Door Open'
+0.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+0.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID NewInteger : getValue == OPEN_INT
+0.61s  A F DoorMotor FRONT LEFT : command == OPEN
+
+;#transition 'T5.1'
+0.71s  I ONCE F CarCall 3 FRONT = false
+0.71s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+0.71s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#state 'S5.2 Door Stop While Open'
+1.21s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+1.21s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID NewInteger : getValue == STOP_INT
+1.21s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#state 'S9.2 STATE_LIGHT_OFF'
+1.21s  A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_OFF
+1.21s  A F CarLight 4 FRONT : lighted == false
+1.21s A N CAR_CALL_[4][FRONT]_CAN_ID  NewBoolean : getValue == false
+
+;#arc '2A/1a',;#arc '2A/1b'
+1.41s I MESSAGE_PERIOD F CarCall 4 FRONT = true
+
+;#state 'S9.1 STATE_LIGHT_ON'
+1.81s A S CarButtonControl[4][FRONT] : STATE == STATE_LIGHT_ON
+
+;#arc '2A/2a'
+1.81s A F CarLight 4 FRONT : lighted == true
+
+;#arc '2A/2b'
+1.81s A N CAR_CALL_[4][FRONT]_CAN_ID  NewBoolean : getValue == true
+
+2.20s I MESSAGE_PERIOD F CarCall 4 FRONT = false
+
+;#arc '2A/3'
+;#state 'S5.3 Door Nudge'
+3.51s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
+;check the output
+3.51s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID NewInteger : getValue == CLOSE_INT
+3.51s  A F DoorMotor FRONT LEFT : command == CLOSE
+
+;#arc '2A/4a'
+;#transition 'T5.5'
+3.91s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+3.91s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+3.91s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 UP FRONT
+
+;#arc '2A/4b'
+;#state 'S5.4 Door Stop While Closed'
+4.31s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSED
+

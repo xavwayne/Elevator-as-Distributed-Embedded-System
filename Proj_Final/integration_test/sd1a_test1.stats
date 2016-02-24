@@ -1,0 +1,27 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+
+Simulator Parameters:
+Command line = -cf sd1a.cf -mf sd1a_test1.mf
+RandomSeed = 1447955711033
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd1a_test1.mf
+Controller File = sd1a.cf
+
+Assertion Results:
+@0.21s:  PASSED HallButtonControl[4][FRONT][DOWN]::checkState(STATE) ?== STATE_HALL_LIGHT_OFF PASSED
+@0.21s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@511d50c0 :: lighted ?== false PASSED
+@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5e2de80c :: getValue ?== false PASSED
+@1.21s:  PASSED HallButtonControl[4][FRONT][DOWN]::checkState(STATE) ?== STATE_HALL_LIGHT_ON PASSED
+@1.21s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@6f94fa3e :: lighted ?== true PASSED
+
+
+******************Summary******************
+Passed:  5
+Failed:  0
+Total :  5
+

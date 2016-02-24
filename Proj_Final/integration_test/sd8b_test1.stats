@@ -1,0 +1,25 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+
+Simulator Parameters:
+Command line = -cf sd8b.cf -mf sd8b_test1.mf -head header.txt
+RandomSeed = 1447967756007
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd8b_test1.mf
+Controller File = sd8b.cf
+
+Assertion Results:
+@0.51s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@40deea66 :: getFloor ?== 1 PASSED
+@0.51s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6cc235e1 :: speed ?== STOP PASSED
+@0.51s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@b6e0054 :: direction ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  3
+Failed:  0
+Total :  3
+

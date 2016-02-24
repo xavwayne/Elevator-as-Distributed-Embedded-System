@@ -1,0 +1,34 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+
+Simulator Parameters:
+Command line = -cf sd9a.cf -mf sd9a_test1.mf
+RandomSeed = 1449377443809
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd9a_test1.mf
+Controller File = sd9a.cf
+
+Assertion Results:
+@0.61s:  PASSED Dispatcher::checkState(STATE) ?== STATE_COMPUTE PASSED
+@0.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5e481248 :: getDirection ?== STOP PASSED
+@0.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@63947c6b :: getHallway ?== FRONT PASSED
+@0.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@355da254 :: getFloor ?== 3 PASSED
+@0.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@d716361 :: getValue ?== 3000 PASSED
+@0.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3764951d :: getValue ?== 3000 PASSED
+@1.41s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
+@1.41s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3cd1a2f1 :: getValue ?== 0 PASSED
+@1.41s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7440e464 :: command ?== OPEN PASSED
+@4.61s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPEN PASSED
+@4.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@27c170f0 :: getValue ?== 2 PASSED
+@4.61s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2626b418 :: command ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  12
+Failed:  0
+Total :  12
+

@@ -1,0 +1,49 @@
+; 18649 <fall-2015>
+; group 3
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; carpositioncontrol_test1.mf
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+;at the 1st floor  
+0s  I  MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID  CarLevelPosition  = 0  
+0s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 0
+
+;#state 'S10.1 At_Floor'
+0.41s  A  S CarPositionControl : STATE == STATE_AT_FLOOR
+0.41s  A  N CAR_LEVEL_POSITION_CAN_ID NewInteger  : getValue == 0
+0.41s  A  N CAR_POSITION_CAN_ID NewInteger  : getValue == 1
+
+0.41s  A  F Drive : speed == STOP
+0.41s  A  F Drive : direction == STOP
+
+
+;#transition 'T10.1'
+0.61s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 UP FRONT
+0.61s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 1000
+
+0.81s  I  MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID  CarLevelPosition  = 2000
+
+
+1.01s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
+1.01s A  N DRIVE_SPEED_CAN_ID NewInteger : getValue == 1000
+
+;#state 'S10.2 Between_Floors'
+1.11s  A N CAR_LEVEL_POSITION_CAN_ID NewInteger  : getValue == 2000
+1.11s  A N CAR_POSITION_CAN_ID NewInteger  : getValue == 1
+1.11s  A S CarPositionControl : STATE == STATE_BETWEEN_FLOORS
+
+
+;#transition 'T10.2'
+1.31s  I  MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID  CarLevelPosition  = 4800
+1.31s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 UP FRONT
+
+1.51s  A N CAR_LEVEL_POSITION_CAN_ID NewInteger  : getValue == 4800
+
+1.71s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 0
+
+;#state 'S10.1 At_Floor'
+1.91s  A S CarPositionControl : STATE == STATE_AT_FLOOR
+2.01s  A N CAR_POSITION_CAN_ID NewInteger  : getValue == 2
+

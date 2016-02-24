@@ -1,0 +1,9 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd7c.cf
+
+DoorControl FRONT LEFT 100ms true
+DoorControl FRONT RIGHT 100ms false
+LanternControl UP 100ms true
+LanternControl DOWN 100ms false

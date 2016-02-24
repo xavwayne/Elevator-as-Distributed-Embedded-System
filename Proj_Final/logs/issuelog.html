@@ -1,0 +1,1366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252"
+      http-equiv="Content-Type">
+    <title>18649 - Issue Log</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">18649 - Issue Log<br>
+    </h1>
+    <hr style="width: 100%; height: 2px;">18649 &lt;fall-2015&gt;<br>
+    Group 3 - Jiyu Shi (jiyus)&nbsp;&nbsp;&nbsp; Shuai
+    Wang(shuaiwa1)&nbsp;&nbsp;&nbsp; Xiaoyu
+    Wang(xiaoyuw)&nbsp;&nbsp;&nbsp; Xiao Guo(xiaog)
+    <hr style="width: 100%; height: 2px;">This table has an entry for
+    each design issue during the semester.&nbsp; Add new entries to the
+    bottom of the table (you may need to add new rows).&nbsp; Leave all
+    the previous entries in place so that at the end of the project you
+    have a complete list of the design changes that you have made
+    throughout the project.&nbsp; The meaning of the table entries is as
+    follows:<br>
+    <ul>
+      <li>Issue number - unique identifier for each entry</li>
+      <li>Date found - the date the issue was found</li>
+      <li>Date fixed - the date the issue was fixed</li>
+      <li>Change made by - andrewID of the person or persons responsible
+        for the change</li>
+      <li>Origin - the earliest artifact where the issue was
+        present.&nbsp; For example, if the a bug in the code is
+        ultimately the result of an incorrect sequence diagram, then the
+        origin would be that particular sequence diargam</li>
+      <li>Description - brief description of the issue</li>
+      <li>Resolution - brief description of the changes made to resolve
+        the issue.&nbsp; If the entry is not resolved, put a note like
+        "Pending" here.<br>
+      </li>
+      <li>Artifact(s) chagned - a list of the artifacts that were
+        modified to resolve the issue.&nbsp; This should be a specific
+        list, such as "doorcontrol requirements", "SD 1.4A",
+        "DriveControl statechart", "doorcontrol.java"<br>
+      </li>
+    </ul>
+    <br>
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="1756" width="1329">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">Issue #<br>
+          </td>
+          <td style="vertical-align: top;">Date Found<br>
+          </td>
+          <td style="vertical-align: top;">Date Fixed<br>
+          </td>
+          <td style="vertical-align: top;">Change Made By<br>
+          </td>
+          <td style="vertical-align: top;">Origin<br>
+          </td>
+          <td style="vertical-align: top;">Description<br>
+          </td>
+          <td style="vertical-align: top;">Resolution<br>
+          </td>
+          <td style="vertical-align: top;">Artifact(s) Changed<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">1<br>
+          </td>
+          <td style="vertical-align: top;">09/21/2015<br>
+          </td>
+          <td style="vertical-align: top;">09/21/2015 </td>
+          <td style="vertical-align: top;">jiyus<br>
+          </td>
+          <td style="vertical-align: top;">
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            reqs/requirements2.html<br>
+          </td>
+          <td style="vertical-align: top;">There is no behaviors
+            requirements about reversal, so reversal constraints and
+            some sequence diagaram can not be traced.<br>
+          </td>
+          <td style="vertical-align: top;">Add time-triggered behavior
+            5.13 about reversal event.<br>
+          </td>
+          <td style="vertical-align: top;">Add 5.13.1 and 5.13.2<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">2<br>
+          </td>
+          <td style="vertical-align: top;">09/21/2015<br>
+          </td>
+          <td style="vertical-align: top;">09/21/2015</td>
+          <td style="vertical-align: top;">shuaiwa1<br>
+          </td>
+          <td style="vertical-align: top;">scen_sd/sd3a.png<br>
+          </td>
+          <td style="vertical-align: top;">1.Forget one of parameters in
+            HallLight[f,d,b] 2.Wrong usage of input and output for
+            HallButtonControl 3.Forget parameter in mDesiredFloor(f,b,d)<br>
+          </td>
+          <td style="vertical-align: top;">1.Change HallLight[f,b] to
+            HallLight[f,d,b] 2.Utilize correct input and output for
+            HallButtonControl 3.Add parameters in mDesiredFloor(f,b,d)<br>
+          </td>
+          <td style="vertical-align: top;">1.SD3A 2 2.SD3A 1a 3.SD3A 3a<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">3<br>
+          </td>
+          <td valign="top">09/23/2015</td>
+          <td valign="top">09/21/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">scen_sd/sd2a.png sd2b.png sd4a.png<br>
+          </td>
+          <td valign="top">1.sd2a: lack of dispatcher and mCarCall
+            message send to dispatcher.<br>
+            2.sd2b: some parts about the process that car button control
+            light on and off is wrong.<br>
+            3.sd4a:AtFloor shall send message to Dispatcher<br>
+          </td>
+          <td valign="top">1. add dispatcher and mCarCall message send
+            to dispatcher.<br>
+            2. modify those parts according to event-triggered
+            behaviors.<br>
+            3.Add arc from AtFloor to Dispatcher </td>
+          <td valign="top">1.SD2A<br>
+            2.SD2B<br>
+            3.SD4A<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">4<br>
+          </td>
+          <td valign="top">10/08/2015<br>
+          </td>
+          <td valign="top">10/08/2015</td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">logs/peerreviewlog.html<br>
+          </td>
+          <td valign="top">Artifacts should be peer reviewed
+            individually, Not by the person who completed the
+            objects.&nbsp; If this happens again next week, you will
+            receive 0 points for peer review<br>
+          </td>
+          <td valign="top">Modify all the xlsx file and its name.<br>
+          </td>
+          <td valign="top">all the xlsx file and&nbsp;
+            peerreviewlog.html<br>
+            in peerreviewlog.html</td>
+        </tr>
+        <tr>
+          <td valign="top">5<br>
+          </td>
+          <td valign="top">10/16/2015</td>
+          <td valign="top">10/16/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">reqs/requirements2.html</td>
+          <td valign="top">transition of car button has been modified,
+            in order to avoid race condition if the door is opening and
+            car is pressed on the same time<br>
+          </td>
+          <td valign="top">Modify the related table of the code change.<br>
+          </td>
+          <td valign="top">CarButtonControl.java<br>
+            reqs/requirements2.html T9.2<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">6<br>
+          </td>
+          <td valign="top">10/16/2015</td>
+          <td valign="top">10/16/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">reqs/requirements2.html</td>
+          <td valign="top">State charts can not have a arc point to
+            itself<br>
+          </td>
+          <td valign="top">Insert a new state with an alwasy true exit.<br>
+          </td>
+          <td valign="top">reqs/requirements2.html 11<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">7<br>
+          </td>
+          <td valign="top">10/16/2015</td>
+          <td valign="top">10/16/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">scen_sd/sd4a.png </td>
+          <td valign="top">Carbutton Control need another trigger that
+            is mDoorClosed &lt;- flase<br>
+          </td>
+          <td valign="top">Provide a new DoorClosed sensor in the
+            sequence diagram.<br>
+          </td>
+          <td valign="top">scen_sd/sd4a.png </td>
+        </tr>
+        <tr>
+          <td valign="top">8<br>
+          </td>
+          <td valign="top">10/16/2015</td>
+          <td valign="top">10/16/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">scen_sd/sd9a.png </td>
+          <td valign="top">No use of drive control<br>
+          </td>
+          <td valign="top">Delete this object.<br>
+          </td>
+          <td valign="top">scen_sd/sd9a.png </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">9<br>
+          </td>
+          <td style="vertical-align: top;">10/21/2015<br>
+          </td>
+          <td style="vertical-align: top;">10/21/2015<br>
+          </td>
+          <td style="vertical-align: top;">xiaoyuw<br>
+          </td>
+          <td style="vertical-align: top;">acceptance_test/proj7acceptance1.pass<br>
+          </td>
+          <td style="vertical-align: top;">Passengers can not be
+            delivered, because the car is not leveled.<br>
+          </td>
+          <td style="vertical-align: top;">Change the design for
+            DriveControl. Add LEVEL_UP and LEVEL_DOWN state and relative
+            transitions to make the car level with the floor.<br>
+          </td>
+          <td style="vertical-align: top;">scen_sd/sd8a.png,<br>
+            reqs/stateChart6.png,<br>
+            reqs/requirements2.html/DriveControl,<br>
+            elevatorcontrol/DriveControl.java,<br>
+            unit_test/drivecontrol_test1.mf,<br>
+            unit_test/drivecontrol_test8.mf,<br>
+            unit_test/drivecontrol_test9.mf,<br>
+            integration_test/sd8a_test1.mf<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">10<br>
+          </td>
+          <td valign="top">10/28/2015<br>
+          </td>
+          <td valign="top">10/28/2015 </td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">scen_sd/sd1b </td>
+          <td valign="top">According to high level requirements R-T7,
+            before the door fully closed , door shall reopen if someone
+            pressed button of the same direction.<br>
+          </td>
+          <td valign="top">Change the scenario and related sequence
+            diagram<br>
+          </td>
+          <td valign="top">scen_sd/sd1b.png<br>
+            scen_sd/sd1b/scenario<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">11<br>
+          </td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">scen_sd/sd5a</td>
+          <td valign="top">According to high level requirements R-T10,
+            Nudge shall be commanded only if there is at least once
+            reversal.<br>
+          </td>
+          <td valign="top">Change the scenario and related sequence
+            diagram<br>
+          </td>
+          <td valign="top">scen_sd/sd5a.png<br>
+            scen_sd/sd5a/scenario</td>
+        </tr>
+        <tr>
+          <td valign="top">12<br>
+          </td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">scen_sd/sd5b</td>
+          <td valign="top">The same issue as above<br>
+          </td>
+          <td valign="top">The same issue as above</td>
+          <td valign="top">scen_sd/sd5b.png<br>
+            scen_sd/sd5b/scenario</td>
+        </tr>
+        <tr>
+          <td valign="top">13<br>
+          </td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">jiyus </td>
+          <td valign="top">reqs/requirements2.html </td>
+          <td valign="top">According to high level requirements R-T7 and
+            R-T10, time triggered behaviors of DoorControl need to be
+            modified.<br>
+          </td>
+          <td valign="top">1.added ReversalCount to State <br>
+            2.Change 5.9 to "5.9&nbsp; When CountDown &lt;= 0 and
+            ReversalCount &lt; 1, DoorMotor[b,r] should be commanded to
+            Close."<br>
+            3.Added "5.14 If ReversalCount &gt;= 1 and CountDown &lt;=
+            0, DoorMotor[b,r] should be commanded to Nudge."<br>
+            4.add condition"and any mCarCall[f,b] is True or
+            mHallCall[f,b,d] is True where d = mDesiredFloor.d" to 5.6<br>
+          </td>
+          <td valign="top">reqs/requirements2.htm/5.6<br>
+            reqs/requirements2.htm/5.9 <br>
+            reqs/requirements2.htm/5.14<br>
+            reqs/requirements2.htm/state of "5.DoorControl[b,r]"<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">14<br>
+          </td>
+          <td valign="top">10/28/2015<br>
+          </td>
+          <td valign="top">10/28/2015<br>
+          </td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">scen_sd/sd6a<br>
+          </td>
+          <td valign="top">According to high level requirements R-T9,
+            The Drive shall be commanded to fast speed to the maximum
+            degree practicable.<br>
+          </td>
+          <td valign="top">Change AtFloor sensor to CarLevelPosition
+            sensor.<br>
+          </td>
+          <td valign="top">scen_sd/sd6a.png<br>
+            scen_sd/sd6a/scenario </td>
+        </tr>
+        <tr>
+          <td valign="top">15<br>
+          </td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">scen_sd/sd7a</td>
+          <td valign="top">According to our design of Dispathcer, it
+            won't calculate DesiredFloor when door is open.<br>
+          </td>
+          <td valign="top">Delete mDoorOpened[b,r] = true<br>
+          </td>
+          <td valign="top">scen_sd/sd7a.png</td>
+        </tr>
+        <tr>
+          <td valign="top">16<br>
+          </td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">scen_sd/sd7b</td>
+          <td valign="top">According to our design of Dispathcer, it
+            won't calculate DesiredFloor when door is open.</td>
+          <td valign="top">Delete mDoorOpened[b,r] = true</td>
+          <td valign="top">scen_sd/sd7b.png</td>
+        </tr>
+        <tr>
+          <td valign="top">17<br>
+          </td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">scen_sd/sd8d</td>
+          <td valign="top">According to high level requirements R-T8.3,
+            If one of the car lanterns is lit, the car shall service any
+            calls in that direction first.<br>
+          </td>
+          <td valign="top">Add a new scenario 8D<br>
+          </td>
+          <td valign="top">scen_sd/sd8d.png<br>
+            scen_sd/sd8d/scenario </td>
+        </tr>
+        <tr>
+          <td valign="top">18<br>
+          </td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">10/28/2015</td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">reqs/requirements2.html</td>
+          <td valign="top">According to high level requirements R-T9,
+            The Drive shall be commanded to fast speed to the maximum
+            degree practicable. So CarPositionControl need to be
+            modified.<br>
+          </td>
+          <td valign="top">Change the condition of state transition from
+            mAtFloor to CarLevelPosition(x).<br>
+          </td>
+          <td valign="top">reqs/requirements2.htm/10.4<br>
+            reqs/requirements2.htm/T10.1 Transistion condition. <br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">19<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">xiaoyuw</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">architecture</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">Dispatcher is
+              not smart enough yet, since it moves the car level by
+              level.</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">Add
+              mCarLevelPositionIndicator to the input of the Dispatcher
+              and DriveControl.</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px; float:
+              none; display: inline !important;">scen_sd/sd9a.png,</span><br
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px;">
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; float: none; display:
+              inline !important;">reqs/requirements2.html/Dispatcher,</span><br
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px;">
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; float: none; display:
+              inline !important;">reqs/stateChart11,</span><br
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px;">
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; float: none; display:
+              inline !important;">elevatorcontrol/Dispatcher.java,</span><br
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px;">
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; float: none; display:
+              inline !important;">unit_test/dispatcher_test1.mf,</span><br
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px;">
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; float: none; display:
+              inline !important;">integration_test/sd9a_test1.mf.</span></td>
+        </tr>
+        <tr>
+          <td valign="top">20<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">xiaoyuw</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">scen_sd/sd8a</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">According to
+              high level requirements R-T9,<span
+                class="Apple-converted-space">&nbsp;</span></span><span
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; float: none; display:
+              inline !important;">The Drive shall be commanded to fast
+              speed to the maximum degree practicable.</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">Change the
+              sequence diagram. Add 4c,4d,5e,5f arcs.</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">scen_sd/sd8a.png</span></td>
+        </tr>
+        <tr>
+          <td valign="top">21<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">xiaoyuw</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">According to
+              high level requirements R-T9,<span
+                class="Apple-converted-space">&nbsp;</span></span><span
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; float: none; display:
+              inline !important;">The Drive shall be commanded to fast
+              speed to the maximum degree practicable.</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">Add 6.16 and 6.1</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html/DriveControl</span></td>
+        </tr>
+        <tr>
+          <td valign="top">22<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">xiaoyuw</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">According to
+              high level requirements, Dispatcher shall not stop level
+              by level</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">All behaviors
+              rewrite</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html/Dispatcher</span></td>
+        </tr>
+        <tr>
+          <td valign="top">23<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">10/28/2015</span></td>
+          <td valign="top">xiaog<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html</span></td>
+          <td valign="top">Lantern control behavior requirement should
+            have changed in last project<br>
+          </td>
+          <td valign="top">requirement changed into the right one<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html/LanternControl</span></td>
+        </tr>
+        <tr>
+          <td valign="top">24<br>
+          </td>
+          <td valign="top">11/05/2015<br>
+          </td>
+          <td valign="top">11/05/2015<br>
+          </td>
+          <td valign="top">jiyus <br>
+          </td>
+          <td valign="top">reqs/<span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">requirements2.html<br>
+              traceability<br>
+              /unit_test<br>
+            </span> </td>
+          <td valign="top">Updated statecharts and
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            requirements-to-statecharts tracebility according to new
+            time triggered behaviors, also update some tt because it's
+            not reasonable. </td>
+          <td valign="top">Made changed described on the left<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html/Dispatcher<br>
+              traceability/sc_code.html<br>
+              /req_const_traceability.html<br>
+              /unit_test<br>
+            </span> </td>
+        </tr>
+        <tr>
+          <td valign="top">25<br>
+          </td>
+          <td valign="top">11/05/2015</td>
+          <td valign="top">11/05/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">elevatorcontrol/Utility.java<br>
+          </td>
+          <td valign="top">new dispatcher need functions to get
+            information about car call and hall call to make calculation<br>
+          </td>
+          <td valign="top">Modified utility.class and added some new
+            class and methods to store such information.<br>
+          </td>
+          <td valign="top">elevatorcontrol/Utility.java</td>
+        </tr>
+        <tr>
+          <td valign="top">26<br>
+          </td>
+          <td valign="top">11/05/2015 </td>
+          <td valign="top">11/05/2015 </td>
+          <td valign="top">xiaog<br>
+          </td>
+          <td valign="top">reqs/<span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">requirements2.html<br>
+              traceability<br>
+              /unit_test</span> </td>
+          <td valign="top">Updated statecharts and
+            requirements-to-statecharts tracebility according to new
+            time triggered behaviors, also update some tt because it's
+            not reasonable. </td>
+          <td valign="top">Updated door control<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html<br>
+              /req_const_traceability.html<br>
+              /unit_test</span> </td>
+        </tr>
+        <tr>
+          <td valign="top">27</td>
+          <td valign="top">11/05/2015</td>
+          <td valign="top">11/05/2015</td>
+          <td valign="top">xiaog<br>
+          </td>
+          <td valign="top">reqs/<span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">requirements2.html</span></td>
+          <td valign="top">Reversal Counter is not set in the behavior<br>
+          </td>
+          <td valign="top">5.13.3 added<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html</span></td>
+        </tr>
+        <tr>
+          <td valign="top">28<br>
+          </td>
+          <td valign="top">11/05/2015<br>
+          </td>
+          <td valign="top">11/05/2015<br>
+          </td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">traceability/req_const_traceability.html<br>
+          </td>
+          <td valign="top">missing time triggered behavior of 5.14
+            according to the feedback of TA<br>
+          </td>
+          <td valign="top">added 5.14 and trace it<br>
+          </td>
+          <td valign="top">traceability/req_const_traceability.html </td>
+        </tr>
+        <tr>
+          <td valign="top">29<br>
+          </td>
+          <td valign="top">11/05/2015<br>
+          </td>
+          <td valign="top">11/05/2015<br>
+          </td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">logs/peerreviewlog.html<br>
+          </td>
+          <td valign="top">missing peer review of time triggered
+            behaviors of 4 controller in proj8&nbsp; according to the
+            feedback of TA</td>
+          <td valign="top">added and modified 4 peer review logs of tt
+            according to new high level requirements<br>
+          </td>
+          <td valign="top">logs/peerreviewlog.html</td>
+        </tr>
+        <tr>
+          <td valign="top">30<br>
+          </td>
+          <td valign="top">11/11/2015<br>
+          </td>
+          <td valign="top">11/11/2015<br>
+          </td>
+          <td valign="top">shuaiwa1<br>
+          </td>
+          <td valign="top">elevatorcontrol/CarPositionControl<br>
+          </td>
+          <td valign="top">In fast speed, CarPositionControl should not
+            use atFloor sensor to determine which floor is the car at.<br>
+          </td>
+          <td valign="top">Use drive speed to calculate commit points.
+            The car position indicator is then determined.<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html</span><br>
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;">elevatorcontrol/CarPositionControl
+
+
+
+
+
+
+
+
+
+
+
+
+
+              tracebility/req_const_traceability.html<br>
+            </span><span style="color: rgb(0, 0, 0); font-family: 'Times
+              New Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;"><span style="color: rgb(0, 0,
+                0); font-family: 'Times New Roman'; font-size: medium;
+                font-style: normal; font-variant: normal; font-weight:
+                normal; letter-spacing: normal; line-height: normal;
+                orphans: auto; text-align: left; text-indent: 0px;
+                text-transform: none; white-space: normal; widows: 1;
+                word-spacing: 0px; -webkit-text-stroke-width: 0px;
+                display: inline !important; float: none;">tracebility</span>/sc_code.html</span><br>
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;"><span style="color: rgb(0, 0,
+                0); font-family: 'Times New Roman'; font-size: medium;
+                font-style: normal; font-variant: normal; font-weight:
+                normal; letter-spacing: normal; line-height: normal;
+                orphans: auto; text-align: left; text-indent: 0px;
+                text-transform: none; white-space: normal; widows: 1;
+                word-spacing: 0px; -webkit-text-stroke-width: 0px;
+                display: inline !important; float: none;"><span
+                  style="color: rgb(0, 0, 0); font-family: 'Times New
+                  Roman'; font-size: medium; font-style: normal;
+                  font-variant: normal; font-weight: normal;
+                  letter-spacing: normal; line-height: normal; orphans:
+                  auto; text-align: left; text-indent: 0px;
+                  text-transform: none; white-space: normal; widows: 1;
+                  word-spacing: 0px; -webkit-text-stroke-width: 0px;
+                  display: inline !important; float: none;">tracebility</span>/sd_req_traceability.xlsx</span>
+              unit_test/carpositioncontrol_test1.mf</span> </td>
+        </tr>
+        <tr>
+          <td valign="top">31<br>
+          </td>
+          <td valign="top">11/11/2015</td>
+          <td valign="top">11/11/2015</td>
+          <td valign="top">xiaoyuw<br>
+          </td>
+          <td valign="top">elevatorcontrol/DriveControl<br>
+          </td>
+          <td valign="top">Re-implement DriveControl for fast speed
+            elevator<br>
+          </td>
+          <td valign="top">Add FAST_UP and FAST_DOWN states to implement
+            the fast elevator.<br>
+            Add mCarPositionIndicator as input.<br>
+            <br>
+            Overweight is no more considered as Emergency.<br>
+          </td>
+          <td valign="top"><span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">reqs/requirements2.html</span><br>
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;">elevatorcontrol/DriveControl
+              tracebility/req_const_traceability.html<br>
+            </span><span style="color: rgb(0, 0, 0); font-family: 'Times
+              New Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;"><span style="color: rgb(0, 0,
+                0); font-family: 'Times New Roman'; font-size: medium;
+                font-style: normal; font-variant: normal; font-weight:
+                normal; letter-spacing: normal; line-height: normal;
+                orphans: auto; text-align: left; text-indent: 0px;
+                text-transform: none; white-space: normal; widows: 1;
+                word-spacing: 0px; -webkit-text-stroke-width: 0px;
+                display: inline !important; float: none;">tracebility</span>/sc_code.html</span><br>
+            <span style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;"><span style="color: rgb(0, 0,
+                0); font-family: 'Times New Roman'; font-size: medium;
+                font-style: normal; font-variant: normal; font-weight:
+                normal; letter-spacing: normal; line-height: normal;
+                orphans: auto; text-align: left; text-indent: 0px;
+                text-transform: none; white-space: normal; widows: 1;
+                word-spacing: 0px; -webkit-text-stroke-width: 0px;
+                display: inline !important; float: none;"><span
+                  style="color: rgb(0, 0, 0); font-family: 'Times New
+                  Roman'; font-size: medium; font-style: normal;
+                  font-variant: normal; font-weight: normal;
+                  letter-spacing: normal; line-height: normal; orphans:
+                  auto; text-align: left; text-indent: 0px;
+                  text-transform: none; white-space: normal; widows: 1;
+                  word-spacing: 0px; -webkit-text-stroke-width: 0px;
+                  display: inline !important; float: none;">tracebility</span>/sd_req_traceability.xlsx</span>
+              unit_test/drivecontrol_test1~7.mf </span><span
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;"> </span></td>
+        </tr>
+        <tr>
+          <td valign="top">32<br>
+          </td>
+          <td valign="top">11/12/2015<br>
+          </td>
+          <td valign="top">11/12/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">reqs/<span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">requirements2.html</span></td>
+          <td valign="top">Statechart of dispatcher shall not have empty
+            state without setting any output <br>
+          </td>
+          <td valign="top">Set the output as unchanged in the state
+            "State_after_arrtive"<br>
+          </td>
+          <td valign="top">reqs/<span style="color: rgb(0, 0, 0);
+              font-family: 'Times New Roman'; font-size: medium;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height: normal;
+              orphans: auto; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: normal; widows: 1;
+              word-spacing: 0px; -webkit-text-stroke-width: 0px;
+              display: inline !important; float: none;">requirements2.html/dispatcher</span></td>
+        </tr>
+        <tr>
+          <td valign="top">33<br>
+          </td>
+          <td valign="top">11/14/2015 </td>
+          <td valign="top">11/14/2015 </td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">elevatorcontrol/Dispatcher.java </td>
+          <td valign="top">Find some bugs of Dispatcher.java,the issue
+            is happening in the calculation() function, to calculate the
+            desired direction<br>
+          </td>
+          <td valign="top">Change the code and now it's more efficiency<br>
+          </td>
+          <td valign="top">elevatorcontrol/Dispatcher.java </td>
+        </tr>
+        <tr>
+          <td valign="top">34<br>
+          </td>
+          <td valign="top">11/14/2015<br>
+          </td>
+          <td valign="top">11/14/2015<br>
+          </td>
+          <td valign="top">xiaoyuw</td>
+          <td valign="top">elevatorcontrol/RuntimeRequirementsMonitor.java</td>
+          <td valign="top">Implement new high level requirements about
+            RT-9<br>
+          </td>
+          <td valign="top">Add code to monitor about RT-9<br>
+          </td>
+          <td valign="top">elevatorcontrol/RuntimeRequirementsMonitor.java</td>
+        </tr>
+        <tr>
+          <td valign="top">35<br>
+          </td>
+          <td valign="top">11/17/2015<br>
+          </td>
+          <td valign="top">11/17/2015</td>
+          <td valign="top">xiaog<br>
+          </td>
+          <td valign="top">elevatorcontrol/DoorControl.java </td>
+          <td valign="top">Door will be commanded to nudge only after 5
+            times of reversal <br>
+          </td>
+          <td valign="top">Change the png and senario description from
+            "nudge" to close<br>
+          </td>
+          <td valign="top">scen_sd/sd5a.png and related senario</td>
+        </tr>
+        <tr>
+          <td valign="top">36<br>
+          </td>
+          <td valign="top">11/17/2015<br>
+          </td>
+          <td valign="top">11/17/2015</td>
+          <td valign="top">xiaog<br>
+          </td>
+          <td valign="top">elevatorcontrol/DoorControl.java </td>
+          <td valign="top">Door will be commanded to nudge only after 5
+            times of reversal </td>
+          <td valign="top">Change the png and senario description from
+            "nudge" to close</td>
+          <td valign="top">scen_sd/sd5b.png and related senario</td>
+        </tr>
+        <tr>
+          <td valign="top">37<br>
+          </td>
+          <td valign="top">11/17/2015</td>
+          <td valign="top">11/17/2015</td>
+          <td valign="top">xiaoyuw<br>
+          </td>
+          <td valign="top">unit_test/unit_test_log.html<br>
+          </td>
+          <td valign="top">drivecontrol_test3.mf was linked to
+            doorcontrol_test3.mf according to the feedback of last week.<br>
+          </td>
+          <td valign="top">Correct the link.<br>
+          </td>
+          <td valign="top">unit_test/unit_test_log.html</td>
+        </tr>
+        <tr>
+          <td valign="top">38<br>
+          </td>
+          <td valign="top">07/12/2015<br>
+          </td>
+          <td valign="top">07/12/2015 </td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">elevatorcontrol/Dispatcher.java and reqs/<span
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;">requirements2.html</span> </td>
+          <td valign="top">Add a new state to satisfy the high level
+            requirement<br>
+          </td>
+          <td valign="top">Modify the design of dispatcher and other
+            parts like code, unit test, integration test and so on.<br>
+          </td>
+          <td valign="top">elevatorcontrol/Dispatcher.java and reqs/<span
+              style="color: rgb(0, 0, 0); font-family: 'Times New
+              Roman'; font-size: medium; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: normal; orphans: auto; text-align:
+              left; text-indent: 0px; text-transform: none; white-space:
+              normal; widows: 1; word-spacing: 0px;
+              -webkit-text-stroke-width: 0px; display: inline
+              !important; float: none;">requirements2.html and related
+              parterns.</span> </td>
+        </tr>
+        <tr>
+          <td valign="top">39<br>
+          </td>
+          <td valign="top">10/12/2015<br>
+          </td>
+          <td valign="top">10/12/2015<br>
+          </td>
+          <td valign="top">jiyus &amp; xiaoyuw<br>
+          </td>
+          <td valign="top">acceptance_test/acceptance_test_log.html<br>
+          </td>
+          <td valign="top">It is needed to update the acceptance test
+            based on the hand in elevator<br>
+          </td>
+          <td valign="top">Run all the acceptance test on the hand in
+            elevator which is also the same as the demo elevator.<br>
+          </td>
+          <td valign="top">acceptance_test/acceptance_test_log.html and
+            related stats file in the same folder. </td>
+        </tr>
+        <tr>
+          <td valign="top">40<br>
+          </td>
+          <td valign="top">13/12/2015<br>
+          </td>
+          <td valign="top">13/12/2015</td>
+          <td valign="top">xiaog<br>
+          </td>
+          <td valign="top">traceability/req_const_traceability<br>
+          </td>
+          <td valign="top">missing constraints traceability 6.15<br>
+          </td>
+          <td valign="top">Add<br>
+          </td>
+          <td valign="top">raceability/req_const_traceability/6.15</td>
+        </tr>
+        <tr>
+          <td valign="top">41<br>
+          </td>
+          <td valign="top">13/12/2015</td>
+          <td valign="top">13/12/2015</td>
+          <td valign="top">xiaog<br>
+          </td>
+          <td valign="top">unit_test/doorcontrol_test6.mf<br>
+          </td>
+          <td valign="top">missing traceability in doorcontrol unit test
+            of T5.8<br>
+          </td>
+          <td valign="top">Add<br>
+          </td>
+          <td valign="top">unit_test/doorcontrol_test6.mf/T5.8 and
+            unit_test/doorcontrol_test7.mf/T5.8</td>
+        </tr>
+        <tr>
+          <td valign="top">42<br>
+          </td>
+          <td valign="top">13/12/2015<br>
+          </td>
+          <td valign="top">13/12/2015</td>
+          <td valign="top">jiyus<br>
+          </td>
+          <td valign="top">traceability/req_const_traceability</td>
+          <td valign="top">missing a X for constraint
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            10.3</td>
+          <td valign="top">Find related time triggered behavior 10.4 <br>
+          </td>
+          <td valign="top">traceability/req_const_traceability</td>
+        </tr>
+        <tr>
+          <td valign="top">43<br>
+          </td>
+          <td valign="top">15/12/2015<br>
+          </td>
+          <td valign="top">15/12/2015<br>
+          </td>
+          <td valign="top">xiaoyuw<br>
+          </td>
+          <td valign="top">integration_test<br>
+          </td>
+          <td valign="top">7a and 7b both have one assertion fail<br>
+          </td>
+          <td valign="top">modify integration test file<br>
+          </td>
+          <td valign="top">integration_test/sd7a_test1.mf and<br>
+            sd7b_test1.mf<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br class="Apple-interchange-newline">
+  </body>
+</html>

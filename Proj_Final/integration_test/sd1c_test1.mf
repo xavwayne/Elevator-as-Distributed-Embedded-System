@@ -1,0 +1,88 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd1c_test1.mf
+
+#INCLUDE defines.mf
+
+;intialize
+;floor setting up, not at 3rd floor, but desire floor is 3
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
+0s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 UP FRONT
+
+0s  I  ONCE N CAR_CALL_[3][FRONT]_CAN_ID NewBoolean = true
+;door setting up, closed
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID  DoorClosed FRONT RIGHT = true
+
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+;dwell setting up, 2s
+0s  I  MESSAGE_PERIOD N DESIRED_DWELL_[FRONT]_CAN_ID NewInteger = 2000
+;drive speed setting up
+0s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 20
+
+;intialize for hall button control
+;no hall call for 3th floor
+0s  I  MESSAGE_PERIOD F HallCall 3 FRONT DOWN = false            
+
+;#transition 'T5.4'
+0.20s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
+0.20s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 0
+
+;#state 'S5.1 Door Open'
+0.51s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+0.51s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+0.51s  A F DoorMotor FRONT LEFT : command == OPEN
+0.60s  I  ONCE N CAR_CALL_[3][FRONT]_CAN_ID NewBoolean = false
+
+;#transition 'T5.1'
+0.81s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+0.81s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#state 'S5.2 Door Stop While Opened'
+1.21s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+1.21s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+1.21s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#arc '1C/1a'
+;#state 'S5.3 Door CLOSE'
+3.41s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
+;check the output
+3.41s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == CLOSE_INT
+3.41s  A F DoorMotor FRONT LEFT : command == CLOSE
+
+;#arc '1C/2' passenger arrives
+
+;#state 'S8.1 STATE_HALL_LIGHT_OFF'
+3.81s  A S HallButtonControl[3][FRONT][DOWN] : STATE == STATE_HALL_LIGHT_OFF
+3.81s  A F HallLight 3 FRONT DOWN : lighted == false
+3.81s  A N AT_FLOOR_[3][FRONT]_CAN_ID  NewBoolean : getValue == false
+
+;#arc '1C/3a', #arc '1C/3b'
+4.00s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+4.00s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+4.00s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 UP FRONT
+4.00s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 20
+;#transition 'T8.1'
+4.01s I MESSAGE_PERIOD F HallCall 3 FRONT DOWN = true
+
+;#arc '1C/4'
+;#state 'S8.2 STATE_HALL_LIGHT_ON'
+4.41s A S HallButtonControl[3][FRONT][DOWN] : STATE == STATE_HALL_LIGHT_ON
+4.41s A F HallLight 3 FRONT DOWN : lighted == true
+
+;cancel the hall call.
+4.60s I MESSAGE_PERIOD F HallCall 3 FRONT DOWN = false
+
+;#state 'S8.1 STATE_HALL_LIGHT_ON'
+5.41s A S HallButtonControl[3][FRONT][DOWN] : STATE == STATE_HALL_LIGHT_ON
+5.41s A F HallLight 3 FRONT DOWN : lighted == true
+
+;#arc '1C/5a', #arc '1C/5b'
+;#state 'S5.4 Door Stop While Closed'
+6.51s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSED
+;check the output
+6.51s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+6.51s  A F DoorMotor FRONT LEFT : command == STOP

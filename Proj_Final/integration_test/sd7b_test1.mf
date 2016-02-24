@@ -1,0 +1,105 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd7b_test1.mf
+
+;TODO  add test statements
+
+#INCLUDE defines.mf ;include CAN ids and period definitions
+
+;intialize
+;floor setting up
+0s  I  ONCE N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
+0s  I  ONCE N DESIRED_FLOOR_CAN_ID DesiredFloor = 1 STOP FRONT
+0s  I  ONCE N CAR_POSITION_CAN_ID NewInteger = 1
+;dwell setting up
+0s  I  ONCE N DESIRED_DWELL_[FRONT]_CAN_ID NewInteger = 2000
+;drive speed setting up, 1 slow up
+0s  I  ONCE N DRIVE_SPEED_CAN_ID NewInteger = 20
+
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = false
+0s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = false
+
+;#state 'S5.4 Door Stop While Closed'
+0.21s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSED
+;check door statue
+0.21s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true
+;check the output
+0.21s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID NewInteger : getValue == STOP_INT
+0.21s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#state 'S7.1 OFF'
+0.21s  A S LanternControl[UP] : STATE == STATE_OFF
+0.21s  A S LanternControl[DOWN] : STATE == STATE_OFF
+
+;#transition 'T5.4'
+0.5s  I  MESSAGE_PERIOD N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = true
+0.5s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 0
+0.5s  I  ONCE N CAR_CALL_[1][FRONT]_CAN_ID NewBoolean = true
+
+;#arc '7B/1'
+;#state 'S5.1 Door Open'
+0.91s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+0.91s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+0.91s  A F DoorMotor FRONT LEFT : command == OPEN
+
+1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
+1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = false
+1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
+
+1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = true
+1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = true
+1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = true
+
+;#arc '7B/2a', #arc '7B/2b', #arc '7B/3a'
+;#state 'S5.2 Door Stop While Opened'
+1.41s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+1.41s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+1.41s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#arc '7B/3b', arc '7B/3c'
+;all OFF
+1.41s  A S LanternControl[UP] : STATE == STATE_OFF
+1.41s  A S LanternControl[DOWN] : STATE == STATE_OFF
+
+;#arc '7B/4'  Passenger
+
+1.41s A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+1.41s A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
+
+1.50s  I  ONCE N CAR_CALL_[1][FRONT]_CAN_ID NewBoolean = false
+
+;#state 'S5.3 Door Close'
+6.51s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
+;check the output
+6.51s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == CLOSE_INT
+6.51s  A F DoorMotor FRONT LEFT : command == CLOSE
+
+
+6.8s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+6.8s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+6.8s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+6.8s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+
+6.8s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+6.8s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
+6.8s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = false
+6.8s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = false
+
+;#state 'S5.2 Door Stop While CLOSED'
+7.51s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSED
+;check the output
+7.51s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+7.51s  A F DoorMotor FRONT LEFT : command == STOP
+

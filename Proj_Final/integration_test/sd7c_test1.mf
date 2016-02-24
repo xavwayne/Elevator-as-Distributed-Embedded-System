@@ -1,0 +1,98 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd7c_test1.mf
+
+;TODO  add test statements
+
+#INCLUDE defines.mf ;include CAN ids and period definitions
+
+;intialize
+;floor setting up
+0s  I  ONCE N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
+0s  I  ONCE N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 UP FRONT
+;door setting up
+0s  I  ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s  I  ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+;dwell setting up
+0s  I  ONCE N DESIRED_DWELL_[FRONT]_CAN_ID NewInteger = 2000
+;drive speed setting up, 1 slow up
+0s  I  ONCE N DRIVE_SPEED_CAN_ID NewInteger = 20
+0s  I  ONCE N DRIVE_COMMAND_CAN_ID DriveCommand = SLOW UP
+
+;#state 'S5.4 Door Stop While Closed'
+0.21s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSED
+;check door statue
+0.21s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true
+;check the output
+0.21s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+0.21s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#transition 'T5.4'
+0.5s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
+0.5s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 0
+0.5s  I  ONCE N HALL_CALL_[3][FRONT][UP]_CAN_ID NewBoolean = true
+
+;#state 'S5.1 Door Open'
+0.81s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+0.81s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+0.81s  A F DoorMotor FRONT LEFT : command == OPEN
+
+;#transition 'T5.1'
+1.2s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+;line below is optional
+1.2s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false 
+
+;#state 'S5.2 Door Stop While Opened'
+1.81s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+1.81s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+1.81s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#state 'S7.2 ON'
+2.01s  A S LanternControl[UP] : STATE == STATE_ON
+2.01s  A S LanternControl[DOWN] : STATE == STATE_OFF
+;check the output
+2.01s  A N CAR_LANTERN_[UP]_CAN_ID NewBoolean : getValue == true
+2.01s  A F CarLantern UP : lighted == true
+
+2.10s  I  ONCE N HALL_CALL_[3][FRONT][UP]_CAN_ID NewBoolean = false
+2.10s  I  ONCE N HALL_CALL_[4][FRONT][UP]_CAN_ID NewBoolean = true
+
+;#arc '7C/1'
+;#transition 'T5.2'
+;#state 'S5.3 Door Nudge'
+3.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
+;check the output
+3.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == CLOSE_INT
+3.61s  A F DoorMotor FRONT LEFT : command == CLOSE
+
+4s  I  ONCE N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 UP FRONT
+
+;#transition 'T5.1'
+4.1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+4.1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+4.1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+4.1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+;line below is optional
+4.1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+4.1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
+4.1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = false
+4.1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = false
+
+;#arc '7C/2a', #arc '7C/2b'
+;#state 'S5.4 Door Stop While Closed'
+4.91s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSED
+;check door statue
+4.91s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true
+;check the output
+4.91s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+
+;#arc '7C/3a', #arc '7C/3b'
+;#state 'S7.1 OFF'
+4.91s  A S LanternControl[UP] : STATE == STATE_OFF
+4.91s  A S LanternControl[DOWN] : STATE == STATE_OFF
+;check the output
+4.91s  A N CAR_LANTERN_[UP]_CAN_ID NewBoolean : getValue == false
+4.91s  A F CarLantern UP : lighted == false

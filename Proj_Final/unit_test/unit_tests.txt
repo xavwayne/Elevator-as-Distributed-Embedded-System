@@ -1,0 +1,26 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+
+DoorControl doorcontrol.cf doorcontrol_test1.mf
+DoorControl doorcontrol.cf doorcontrol_test2.mf
+DoorControl doorcontrol.cf doorcontrol_test3.mf
+DoorControl doorcontrol.cf doorcontrol_test4.mf
+DoorControl doorcontrol.cf doorcontrol_test5.mf
+DoorControl doorcontrol.cf doorcontrol_test6.mf
+DoorControl doorcontrol.cf doorcontrol_test7.mf
+CarButtonControl carbuttoncontrol.cf carbuttoncontrol_test2.mf
+HallButtonControl hallbuttoncontrol.cf hallbuttoncontrol_test1.mf
+HallButtonControl hallbuttoncontrol2.cf hallbuttoncontrol_test2.mf
+DriveControl drivecontrol.cf drivecontrol_test1.mf
+DriveControl drivecontrol.cf drivecontrol_test2.mf
+DriveControl drivecontrol.cf drivecontrol_test3.mf
+DriveControl drivecontrol.cf drivecontrol_test4.mf
+DriveControl drivecontrol.cf drivecontrol_test5.mf
+DriveControl drivecontrol.cf drivecontrol_test6.mf
+DriveControl drivecontrol.cf drivecontrol_test7.mf
+CarPositionControl carpositioncontrol.cf carpositioncontrol_test1.mf
+Dispatcher dispatcher.cf dispatcher_test2.mf
+LanternControl lanterncontrol.cf lanterncontrol_test1.mf
+LanternControl lanterncontrol.cf lanterncontrol_test2.mf
+

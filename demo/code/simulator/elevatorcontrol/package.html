@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252"
+      http-equiv="Content-Type">
+    <title>18649 Elevatorcontrol Package</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">18649 - Elevator Control Package<br>
+    </h1>
+    <hr style="width: 100%; height: 2px;">18649 &lt;fall-2015&gt;<br>
+    Group 3 - Jiyu Shi (jiyus)&nbsp;&nbsp;&nbsp; Shuai
+    Wang(shuaiwa1)&nbsp;&nbsp;&nbsp; Xiaoyu
+    Wang(xiaoyuw)&nbsp;&nbsp;&nbsp; Xiao Guo(xiaog)
+    <hr style="width: 100%; height: 2px;">This page lists and describes
+    the java files in your elevatorcontrol package.&nbsp; Update this
+    document to reflect your implementation and add your java files to
+    the elevatorcontrol folder.<br>
+    <span style="font-weight: bold;"><br>
+      Note:&nbsp; In order for your portfolio to be complete, the code
+      files in the elevatorcontrol folder must compiled and run if
+      copied into the elevatorcontrol package (overwriting any
+      duplicates) of a clean version of the latest required simulator
+      release.</span><br>
+    <h2>Controller files</h2>
+    <ul>
+      <li><a href="CarButtonControl.java">CarButtonControl.java</a> <br>
+      </li>
+      <li><a href="HallButtonControl.java">HallButtonControl.java</a></li>
+      <li><a href="DoorControl.java">DoorControl.java</a></li>
+      <li><a href="DriveControl.java">DriveControl.java</a></li>
+      <li><a href="CarPositionControl.java">CarPositionControl.java</a></li>
+      <li><a href="Dispatcher.java">Dispatcher.java</a></li>
+      <li><a href="LanternControl.java">LanternControl.java</a><br>
+      </li>
+    </ul>
+    <h2>Translator files</h2>
+    Links and descriptions to all message translators used by the
+    controllers.<br>
+    <ul>
+      <li><a href="NewBooleanCanPayloadTranslator.java">NewBooleanCanPayloadTranslator.java</a>
+        - 1 byte boolean CAN translator, used by CarButtonControl,
+        DoorControl, HallButtonControl, LanternControl, Utility<br>
+      </li>
+      <li><a href="DesiredFloorCanPayloadTranslator.java">DesiredFloorCanPayloadTranslator.java</a>
+        - 2 byte desired floor CAN translator, used by
+        CarPositionControl, Dispatcher, DoorControl, DiveControl,
+        HallButtonControl, LanternControl<br>
+      </li>
+      <li><a href="DoorMotorCommandCanPayloadTranslator.java">DoorMotorCommandCanPayloadTranslator.java</a>
+        - 1 byte door motor command CAN translator, used by DoorControl<br>
+      </li>
+      <li><a href="NewIntegerCanPayloadTranslator.java">NewIntegerCanPayloadTranslator.java</a>
+        - new 4 byte Integer CAN translator, used by CarPositionControl,
+        Dispatcher, DoorControl, DriveControl<br>
+      </li>
+      <li><a href="DriveCommandCanPayloadTranslator.java">DriveCommandCanPayloadTranslator.java</a>
+        - 1 byte drive command CAN translator, used by DriveControl<br>
+      </li>
+    </ul>
+    <h2>Utility files</h2>
+    <ul>
+      <li><a href="Utility.java">Utility.java</a> - changed in project 9
+        , added two new class to store car call and hall call, and
+        related methods to restore pressed car call and hall call to
+        dispatcher<br>
+      </li>
+      <li><a href="Proj7RuntimeMonitor.java">Proj7RuntimeMonitor.java</a>
+        - Created in project 7 , used for count waste openings and other
+        issues required in that porject<br>
+      </li>
+      <li><a href="RuntimeRequirementsMonitor.java">RuntimeRequirementsMonitor.java</a>
+        - Created in project8, updated in porject10 ,used for monitoring
+        new added high level requirements. Now compelted RT6, 7, 8,9,10.</li>
+    </ul>
+    <h2>Message files</h2>
+    <ul>
+      <li><a href="MessageDictionary.java">MessageDictionary.java</a> -
+        changed in project 11 , our own network scheduling.<br>
+      </li>
+    </ul>
+    <ul>
+    </ul>
+    <br>
+  </body>
+</html>

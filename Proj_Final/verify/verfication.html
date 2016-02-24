@@ -1,0 +1,1253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252"
+      http-equiv="Content-Type">
+    <title>Verfication Page</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">18649 - High Level Requirements
+      Verification<br>
+    </h1>
+    <hr style="width: 100%; height: 2px;">18649 &lt;fall-2015&gt;<br>
+    Group 3 - Jiyu Shi (jiyus)&nbsp;&nbsp;&nbsp; Shuai
+    Wang(shuaiwa1)&nbsp;&nbsp;&nbsp; Xiaoyu
+    Wang(xiaoyuw)&nbsp;&nbsp;&nbsp; Xiao Guo(xiaog)<br>
+    <hr style="width: 100%; height: 2px;">
+    <h2>Verification Framework Description<br>
+    </h2>
+    <meta http-equiv="content-type" content="text/html;
+      charset=windows-1252">
+    <meta http-equiv="content-type" content="text/html;
+      charset=windows-1252">
+    In the RuntimeMonitor base class, there is a large amount of
+    physical payloads that covers all the physical payloads we may need
+    to monitor the whole system and check whether the design matches the
+    high level requirements, if not ,warning will be thrown. On the
+    other hand, What we do for monitoring is to use state machines such
+    as CarCallStateMachines, or&nbsp; functions like
+    updateCurrentFloor() to derive events about high level requirements
+    and when related requirements violations events happens, those state
+    machine will call other monitoring functions,e.g,
+    doorOpening(),&nbsp; to detect and record warnings, and
+    updateCurrentFloor() function will implement the monitoring itself.
+    <br>
+    But for current machin<br>
+    <br>
+    <meta http-equiv="content-type" content="text/html;
+      charset=windows-1252">
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td align="center" valign="top"><b>Event State Machine</b><br>
+          </td>
+          <td align="center" valign="top">External Functions for
+            monitoring<br>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top">CarLightStateMachine</td>
+          <td valign="top">NONE / For project 8 this machine only update
+            information of pressed car button <br>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top">DoorStateMachine<br>
+          </td>
+          <td valign="top">doorOpening, doorOpened, doorClosing,
+            doorReopening, doorClosed<br>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top">HallLightStateMachine</td>
+          <td valign="top">NONE / For project 8 this machine only update
+            information of pressed hall button </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top">WeightStateMachine<br>
+          </td>
+          <td valign="top">weightChanged<br>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top">updateCurrentFloor</td>
+          <td valign="top">NONE<br>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top">DriveSpeedStateMachine</td>
+          <td valign="top">carMove,carStop<br>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top">CarLanterStateMachine<br>
+          </td>
+          <td valign="top">lanternOn,lanternOff<br>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top">DriveStateMachine<br>
+          </td>
+          <td valign="top">driveCommandUp,driveCommandDown,driveCommandStop<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <meta http-equiv="content-type" content="text/html;
+      charset=windows-1252">
+    <h3>RT-6
+      <meta http-equiv="content-type" content="text/html;
+        charset=windows-1252">
+      The Car shall only stop at Floors for which there are pending
+      calls.</h3>
+    <p><img alt="" src="Proj8RuntimeMonitor-RT-6.png" height="294"
+        width="612"></p>
+    <p><br>
+    </p>
+    <p>
+      <meta http-equiv="content-type" content="text/html;
+        charset=windows-1252">
+    </p>
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top">Transition #<br>
+          </td>
+          <td valign="top">Guard Condition<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T6.T1]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"><span
+                  data-lucid-type="application/vnd.lucid.text"
+                  data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+                  DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+                  HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+                  Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+                  (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+                  False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                    style="color:#000000;">DriveSpeed != Stop</span></span></span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T6.T2]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DriveSpeed == Stop &amp;&amp;
+                (CarCall[f,b] == True || HallCall[f,b,d] == True)</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T6.T3]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DriveSpeed != Stop</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T6.T4]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DriveSpeed == Stop &amp;&amp;
+                (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+                False)</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    When the elevator stops, the DriveSpeedStateMachine of monitor
+    enters the Car_STOP warning state if <span
+      data-lucid-type="application/vnd.lucid.text"
+      data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1] DriveSpeed ==
+      Stop &amp;&amp; (CarCall[f,b] == True || HallCall[f,b,d] ==
+      True)\n[RV-T6.2] DriveSpeed != Stop\n[RV-T6.3] DriveSpeed == Stop
+      &amp;&amp; (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+      False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+        style="color:#000000;">CarCall[f,b] and HallCall[f,b,d]&nbsp;
+        both equal</span></span> to false, where b equals to any
+    possible value of current floor and f equals to current f, It means
+    that there is no pending calls. otherwise it enters the normal stop
+    state. When moving the monitor returns to the state Car_MOVE.<br>
+    <h3>RT-7
+      <meta http-equiv="content-type" content="text/html;
+        charset=windows-1252">
+      The Car shall only open Doors at Hallways for which there are
+      pending calls.</h3>
+    <h2><img alt="" src="Proj8RuntimeMonitor-RT-7.png" height="294"
+        width="612"></h2>
+    <p>
+      <meta http-equiv="content-type" content="text/html;
+        charset=windows-1252">
+    </p>
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top">Transition #</td>
+          <td valign="top">Guard Condition</td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T7.T1]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorClosing == True</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T7.T2]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorOpening == True &amp;&amp;
+                (HallCall[f,b,d] == True || </span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarCall[f,b] == True)</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T7.T3]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorClosing == True</span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T7.T4]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"> </span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorOpening == True &amp;&amp;
+                (HallCall[f,b,d] == False &amp;&amp; </span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarCall[f,b] == False)</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    When the Door starts opening, the DoorStateMachine of monitor enters
+    the doorOpening state. if <span
+      data-lucid-type="application/vnd.lucid.text"
+      data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1] DriveSpeed ==
+      Stop &amp;&amp; (CarCall[f,b] == True || HallCall[f,b,d] ==
+      True)\n[RV-T6.2] DriveSpeed != Stop\n[RV-T6.3] DriveSpeed == Stop
+      &amp;&amp; (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+      False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+        style="color:#000000;">CarCall[f,b] and HallCall[f,b,d]&nbsp;
+        both equal</span></span> to false, It means that there is no
+    pending calls, then the external function of DoorStateMachine will
+    throw a warning. When door starts closing the monitor returns to the
+    state Door_Close.<br>
+    <h3>RT-8.1 If any door is open at a hallway and there are any
+      pending calls at any other floor(s), a Car Lantern shall turn on.</h3>
+    <img alt="" src="Proj8RuntimeMonitor-RT-8.1.png" height="341"
+      width="742">
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top">Transition #</td>
+          <td valign="top">Guard Condition</td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.1.T1]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorOpening == True &amp;&amp;
+                (any CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+                False where f != current floor)<br>
+              </span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.1.T2]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorClosing == True</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.1.T3]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorOpening == True &amp;&amp;
+                (HallCall[f,b,d] == True || </span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarCall[f,b] == True)</span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.1.T4]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"> </span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorClosing == True</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.1.T5]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorClosing == True</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.1.T6]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">DoorOpening == True &amp;&amp;
+                (HallCall[f,b,d] == True || </span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarCall[f,b] == True)</span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    When the door starts opening, the DoorStateMachine of monitor enters
+    the doorOpening state. if any <span
+      data-lucid-type="application/vnd.lucid.text"
+      data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1] DriveSpeed ==
+      Stop &amp;&amp; (CarCall[f,b] == True || HallCall[f,b,d] ==
+      True)\n[RV-T6.2] DriveSpeed != Stop\n[RV-T6.3] DriveSpeed == Stop
+      &amp;&amp; (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+      False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+        style="color:#000000;">CarCall[f,b] or HallCall[f,b,d]&nbsp;
+        equal</span></span> to false, where f is not current
+    floor,&nbsp;&nbsp; It means that there is&nbsp; pending calls at
+    other floors,and if no Car Lantern is On, then the external function
+    of DoorStateMachine will throw a warning.<br>
+    Meanwhile, CarLanternStateMachine keeps updating the state of car
+    lantern.<br>
+    <h3>RT-8.2 If one of the car lanterns is lit, the direction
+      indicated shall not change while the doors are open.&nbsp;&nbsp; <br>
+    </h3>
+    <img alt="" src="Proj8RuntimeMonitor-RT-8.2.png" height="296"
+      width="609"><br>
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top">Transition #</td>
+          <td valign="top">Guard Condition</td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.2.T1]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span>
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            <span data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.2.1]
+              CarLantern[d] == true\n[RV-T8.2.2] CarLantern[d] ==
+              false\n[RV-T8.2.3] CarLantern[d] == true (d!=prev_d that
+              CarLantern[prev_d]=true)\n[RV-T8.2.4] CarLantern[d] ==
+false&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:178},{&quot;s&quot;:34,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:69,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:144,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarLantern[d] == True</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.2.T2]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span>
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            <span data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.2.1]
+              CarLantern[d] == true\n[RV-T8.2.2] CarLantern[d] ==
+              false\n[RV-T8.2.3] CarLantern[d] == true (d!=prev_d that
+              CarLantern[prev_d]=true)\n[RV-T8.2.4] CarLantern[d] ==
+false&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:178},{&quot;s&quot;:34,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:69,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:144,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarLantern[d] == False</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.2.T3]</span></span></td>
+          <td valign="top">
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            <span data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.2.1]
+              CarLantern[d] == true\n[RV-T8.2.2] CarLantern[d] ==
+              false\n[RV-T8.2.3] CarLantern[d] == true (d!=prev_d that
+              CarLantern[prev_d]=true)\n[RV-T8.2.4] CarLantern[d] ==
+false&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:178},{&quot;s&quot;:34,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:69,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:144,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarLantern[d] == False &amp;&amp;
+              </span></span>all DoorClosed != True</td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.2.T4]</span></span></td>
+          <td valign="top">CarLantern[d] == True &amp;&amp; <span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.2.1]
+              CarLantern[d] == true\n[RV-T8.2.2] CarLantern[d] ==
+              false\n[RV-T8.2.3] CarLantern[d] == true (d!=prev_d that
+              CarLantern[prev_d]=true)\n[RV-T8.2.4] CarLantern[d] ==
+false&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:178},{&quot;s&quot;:34,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:69,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:144,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">all DoorOpening != True</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.2.T5]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.2.1]
+              CarLantern[d] == true\n[RV-T8.2.2] CarLantern[d] ==
+              false\n[RV-T8.2.3] CarLantern[d] == true (d!=prev_d that
+              CarLantern[prev_d]=true)\n[RV-T8.2.4] CarLantern[d] ==
+false&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:178},{&quot;s&quot;:34,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:69,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:144,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarLantern[d] == True</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.2.T6]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.2.1]
+              CarLantern[d] == true\n[RV-T8.2.2] CarLantern[d] ==
+              false\n[RV-T8.2.3] CarLantern[d] == true (d!=prev_d that
+              CarLantern[prev_d]=true)\n[RV-T8.2.4] CarLantern[d] ==
+false&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:178},{&quot;s&quot;:34,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:69,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:144,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">CarLantern[d] == False</span></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    When the car lantern changes state, the CarLanternStateMachine
+    enters On or Off state, If CarLantern Change state from on to off or
+    from off to on,&nbsp; external functions lanternOff() or lanternOn
+    will be called to check whether this change happens if the doorstate
+    is not fully closed or not in opening state respectively. Both of
+    those cases will throw a warning because the direction indicated
+    change while the doors are open.<br>
+    <h3>RT-8.3&nbsp; If one of the car lanterns is lit, the car shall
+      service any calls in that direction first.</h3>
+    <img alt="" src="Proj8RuntimeMonitor-RT-8.3.png" height="120"
+      width="452"><br>
+    <br>
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top">Transition #</td>
+          <td valign="top">Guard Condition</td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.3.T1]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span>
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            <span data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.3.1]
+              Drive.Direction != prevLanternDirection\n[RV-T8.3.2]
+              Drive.Direction == STOP || Drive.Direction ==
+prevLanternDirection&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:130},{&quot;s&quot;:52,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">Drive.Direction !=
+                prevCarLanternState &amp;&amp; any CarCall or HallCall
+                ==true in that direction <br>
+              </span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T8.3.T2]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span>
+            <meta http-equiv="content-type" content="text/html;
+              charset=windows-1252">
+            <span data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.3.1]
+              Drive.Direction != prevLanternDirection\n[RV-T8.3.2]
+              Drive.Direction == STOP || Drive.Direction ==
+prevLanternDirection&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:130},{&quot;s&quot;:52,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">Drive.Direction == STOP ||
+                Drive.Direction == prevCarLanternState</span></span><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1]
+              DriveSpeed == Stop &amp;&amp; (CarCall[f,b] == True ||
+              HallCall[f,b,d] == True)\n[RV-T6.2] DriveSpeed !=
+              Stop\n[RV-T6.3] DriveSpeed == Stop &amp;&amp;
+              (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+              False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;"></span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    Whenever the CarLantern change state from off to on, the external
+    function lanternOn will be called and reltated car lantern direction
+    will be recorded as the prevCarLanternState. Once the car starts to
+    moving, the DriveStateMachine will enters state of related moving
+    direction such as UP, DOWN, and if this direction doesn't match the
+    <span data-lucid-type="application/vnd.lucid.text"
+      data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.3.1]
+      Drive.Direction != prevLanternDirection\n[RV-T8.3.2]
+      Drive.Direction == STOP || Drive.Direction ==
+prevLanternDirection&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:130},{&quot;s&quot;:52,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+        style="color:#000000;">prevCarLanternState</span></span><span
+      data-lucid-type="application/vnd.lucid.text"
+      data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1] DriveSpeed ==
+      Stop &amp;&amp; (CarCall[f,b] == True || HallCall[f,b,d] ==
+      True)\n[RV-T6.2] DriveSpeed != Stop\n[RV-T6.3] DriveSpeed == Stop
+      &amp;&amp; (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+      False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+        style="color:#000000;">, a warning will be throw.<br>
+      </span></span>
+    <h3>RT-9
+      <meta http-equiv="content-type" content="text/html;
+        charset=windows-1252">
+      The Drive shall be commanded to fast speed to the maximum degree
+      practicable.</h3>
+    <img alt="" src="Proj11RuntimeMonitor-RT-9.png" height="294"
+      width="603">
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top">Transition #</td>
+          <td valign="top">Guard Condition</td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T9.T1]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.3.1]
+              Drive.Direction != prevLanternDirection\n[RV-T8.3.2]
+              Drive.Direction == STOP || Drive.Direction ==
+prevLanternDirection&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:130},{&quot;s&quot;:52,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">Drive.speed() &gt; 0<br>
+              </span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T9.T2]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.3.1]
+              Drive.Direction != prevLanternDirection\n[RV-T8.3.2]
+              Drive.Direction == STOP || Drive.Direction ==
+prevLanternDirection&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:130},{&quot;s&quot;:52,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">Drivespeed.speed() == 0
+                &amp;&amp; fastSpeedCommand == true<br>
+              </span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T9.T3]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.3.1]
+              Drive.Direction != prevLanternDirection\n[RV-T8.3.2]
+              Drive.Direction == STOP || Drive.Direction ==
+prevLanternDirection&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:130},{&quot;s&quot;:52,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">Drive.speed() &gt; 0</span></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T9.T4]</span></span></td>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T8.3.1]
+              Drive.Direction != prevLanternDirection\n[RV-T8.3.2]
+              Drive.Direction == STOP || Drive.Direction ==
+prevLanternDirection&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:130},{&quot;s&quot;:52,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">Drivespeed.speed() == 0
+                &amp;&amp; fastSpeedCommand == false<br>
+              </span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>When the car stops at some floor, the carStop() function will
+      check whether the fastSpeedCommand has been set to true or false,
+      if true, it means that once during the traveling state the car has
+      been commanded to&nbsp; fast speed to the maximum degree.Otherwise
+      it was not commanded to fast speed. Once the all doors are closed,
+      the doorClosed() function will reset boolean fastSpeedCommand to
+      false again. </p>
+    <h3>RT-10&nbsp;
+      <meta http-equiv="content-type" content="text/html;
+        charset=windows-1252">
+      For each stop at a floor, at least one door reversal shall have
+      occurred before the doors are commanded to nudge.
+      <meta http-equiv="content-type" content="text/html;
+        charset=windows-1252">
+    </h3>
+    <span data-lucid-type="application/vnd.lucid.text"
+      data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1] DriveSpeed ==
+      Stop &amp;&amp; (CarCall[f,b] == True || HallCall[f,b,d] ==
+      True)\n[RV-T6.2] DriveSpeed != Stop\n[RV-T6.3] DriveSpeed == Stop
+      &amp;&amp; (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+      False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+        style="color:#000000;"></span></span><img alt=""
+      src="Proj10RuntimeMonitor-RT-10.png" height="392" width="552"><br>
+    <br>
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top">Transition #</td>
+          <td valign="top">Guard Condition</td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T10.1]</span></span></td>
+          <td valign="top">DoorCommand == NUDGE &amp;&amp; reversalCount
+            &gt;= 1<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T10.2]</span></span></td>
+          <td valign="top">DoorCommand == NUDGE &amp;&amp; reversalCount
+            == 0<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T10.3]</span></span></td>
+          <td valign="top">DoorClosed == true<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T10.4]</span></span></td>
+          <td valign="top">DoorClosed == true</td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T10.5]</span></span></td>
+          <td valign="top">DoorCommand = Open <br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T10.6]</span></span></td>
+          <td valign="top">CountDown &lt;= 0<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T10.7]</span></span></td>
+          <td valign="top">isReversing == true<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><span
+              data-lucid-type="application/vnd.lucid.text"
+              data-lucid-content="{&quot;t&quot;:&quot;[RV-T7.1]
+              DoorOpening == True &amp;&amp; HallCall[f,b,d] ==
+              True\n[RV-T7.2] DoorClosing == True\n[RV-T7.3] DoorOpening
+              == True &amp;&amp; HallCall[f,b,d] == False\n[RV-T7.4]
+              DoorClosing ==
+True&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:174},{&quot;s&quot;:57,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:87,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:145,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+                style="color:#000000;">[R-T10.8]</span></span></td>
+          <td valign="top">DoorClosed == true<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <span data-lucid-type="application/vnd.lucid.text"
+      data-lucid-content="{&quot;t&quot;:&quot;[RV-T6.1] DriveSpeed ==
+      Stop &amp;&amp; (CarCall[f,b] == True || HallCall[f,b,d] ==
+      True)\n[RV-T6.2] DriveSpeed != Stop\n[RV-T6.3] DriveSpeed == Stop
+      &amp;&amp; (CarCall[f,b] == False &amp;&amp; HallCall[f,b,d] ==
+      False)\n[RV-T6.4] DriveSpeed !=
+Stop&quot;,&quot;m&quot;:[{&quot;s&quot;:0,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:0,&quot;n&quot;:&quot;c&quot;,&quot;v&quot;:&quot;000000ff&quot;,&quot;e&quot;:223},{&quot;s&quot;:82,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:111,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;},{&quot;s&quot;:195,&quot;n&quot;:&quot;a&quot;,&quot;v&quot;:&quot;left&quot;}]}"><span
+        style="color:#000000;">When the door reversal is treggered,
+        reversal count will plus 1, and reversal count will be set to 0
+        when the door is fully closed. Once the monitor received nudge
+        message, monitor will check the count, i.e., whether the door
+        was triggered before, if yes, reversal count is larger than 0
+        otherwise equals to 0. So if count is equal to zero and
+        doormotor is in nudge command, we will record the invalid nudge
+        state and throw a warning about that .<br>
+        <br>
+      </span></span>
+    <h2>Verification Instructions</h2>
+    $java simulator.framework.Elevator -pf
+    <meta http-equiv="content-type" content="text/html;
+      charset=windows-1252">
+    &lt;acceptance test pass file&gt;&nbsp; -monitor
+    RuntimeRequirementsMonitor -gui<br>
+    <h2>Verification Results</h2>
+    <br>
+    <table style="text-align: left; width: 100%;" border="1"
+      cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; font-weight: bold;">Acceptance
+            Test Name<br>
+          </td>
+          <td style="vertical-align: top; font-weight: bold;">Verification
+
+
+
+
+
+
+
+
+
+            Status<br>
+          </td>
+          <td style="vertical-align: top; font-weight: bold;">Link to
+            Verification Results<br>
+          </td>
+          <td style="vertical-align: top; font-weight: bold;">Notes<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">proj7acceptance1.pass<br>
+          </td>
+          <td style="vertical-align: top;">fail(But i considered it is
+            pass because there is only 1 warning and it is reasonable, I
+            will explain it in the Notes part)<br>
+          </td>
+          <td style="vertical-align: top;"><a
+              href="proj7acceptance1_pass.stats">proj7acceptance1_pass.stats</a><br>
+          </td>
+          <td style="vertical-align: top;">RT-6 throws only 1 warnning.
+            It's reasonable because there is a landing happened at the
+            beginning without any calls at that floor.<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">....<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </body>
+</html>

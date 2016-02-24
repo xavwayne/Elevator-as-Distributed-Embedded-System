@@ -1,0 +1,53 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+
+Simulator Parameters:
+Command line = -cf sd2b.cf -mf sd2b_test2.mf -seed 1447980049346
+RandomSeed = 1447980049346
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd2b_test2.mf
+Controller File = sd2b.cf
+
+Assertion Results:
+@0.21s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_CLOSED PASSED
+@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2f92e0f4 :: getValue ?== true PASSED
+@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5305068a :: getValue ?== 2 PASSED
+@0.21s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@279f2327 :: command ?== STOP PASSED
+@1.1s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
+@1.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5caf905d :: getValue ?== 0 PASSED
+@1.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@8efb846 :: command ?== OPEN PASSED
+@1.81s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPEN PASSED
+@1.81s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@30f39991 :: getValue ?== 2 PASSED
+@1.81s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4a574795 :: command ?== STOP PASSED
+@3.61s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_CLOSE PASSED
+@3.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3f99bd52 :: getValue ?== 1 PASSED
+@3.61s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@3a71f4dd :: command ?== CLOSE PASSED
+@4.01s:  PASSED CarButtonControl[3][FRONT]::checkState(STATE) ?== STATE_LIGHT_OFF PASSED
+@4.01s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@5674cd4d :: lighted ?== false PASSED
+@4.01s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@65b54208 :: getValue ?== false PASSED
+@4.01s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6b884d57 :: getValue ?== false PASSED
+@4.01s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@77459877 :: getValue ?== false PASSED
+@4.61s:  PASSED CarButtonControl[3][FRONT]::checkState(STATE) ?== STATE_LIGHT_ON PASSED
+@4.61s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@33c7353a :: lighted ?== true PASSED
+@4.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3af49f1c :: getValue ?== true PASSED
+@5.11s:  PASSED CarButtonControl[3][FRONT]::checkState(STATE) ?== STATE_LIGHT_OFF PASSED
+@5.11s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2f2c9b19 :: getValue ?== false PASSED
+@5.11s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1c20c684 :: getValue ?== false PASSED
+@5.11s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@548c4f57 :: lighted ?== false PASSED
+@5.61s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
+@5.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@87aac27 :: getValue ?== 0 PASSED
+@5.61s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6ce253f1 :: command ?== OPEN PASSED
+@6.11s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPEN PASSED
+@6.11s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@65ab7765 :: getValue ?== 2 PASSED
+@6.11s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@eed1f14 :: command ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  31
+Failed:  0
+Total :  31
+

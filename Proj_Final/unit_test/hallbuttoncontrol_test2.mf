@@ -1,0 +1,47 @@
+; 18649 <fall-2015>
+; group 3
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; hallbuttoncontrol_test2.mf
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+;no hall call for 4th floor
+0s  I  MESSAGE_PERIOD F HallCall 4 FRONT DOWN = false            
+;door closed  
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID  DoorClosed FRONT RIGHT = true
+0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 UP FRONT
+
+;not at the 4th floor  
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID  AtFloor 4 FRONT = false     
+
+;#state 'S8.1 HALL_LIGHT_OFF'
+0.21s  A S HallButtonControl[4][FRONT][DOWN] : STATE == STATE_HALL_LIGHT_OFF
+0.21s  A F HallLight 4 FRONT DOWN : lighted == false
+0.21s  A N AT_FLOOR_[4][FRONT]_CAN_ID  NewBoolean : getValue == false
+
+
+;#transition 'T8.1'
+0.80s I MESSAGE_PERIOD F HallCall 4 FRONT DOWN = true
+
+;#state 'S8.2 STATE_HALL_LIGHT_ON'
+1.21s A S HallButtonControl[4][FRONT][DOWN] : STATE == STATE_HALL_LIGHT_ON
+1.21s A F HallLight 4 FRONT DOWN : lighted == true
+
+
+;cancel the hall call.
+1.40s I MESSAGE_PERIOD F HallCall 4 FRONT DOWN = false
+
+
+;#transition 'T8.2'
+2.00s I MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true 
+2.00s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+2.00s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
+2.00s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 UP FRONT
+
+
+
+;#state 'S8.1 STATE_HALL_LIGHT_OFF'
+2.41s A S HallButtonControl[4][FRONT][DOWN] : STATE == STATE_HALL_LIGHT_ON
+2.41s A F HallLight 4 FRONT DOWN : lighted == true

@@ -1,0 +1,14 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd2b.cf
+
+;Introduction:
+; 3th floor,
+; front hallway
+; down direction instance 
+; with a period of 100 milliseconds a
+; verbose option set to TRUE.
+
+DoorControl FRONT LEFT 50ms true
+CarButtonControl 3 FRONT 100ms false

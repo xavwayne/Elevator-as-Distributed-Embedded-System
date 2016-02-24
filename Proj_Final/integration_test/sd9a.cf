@@ -1,0 +1,13 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd9a.cf
+
+;Introduction:
+; front hallway
+; down direction instance 
+; with a period of 100 milliseconds a
+; verbose option set to TRUE.
+
+DoorControl FRONT LEFT 100ms true
+Dispatcher 8 50ms true

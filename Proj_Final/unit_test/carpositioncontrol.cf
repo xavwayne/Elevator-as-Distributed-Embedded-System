@@ -1,0 +1,10 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; carpositioncontrol.cf 
+
+;Introduction:
+; with a period of 50 milliseconds
+; verbose option set to TRUE.
+
+CarPositionControl 50ms TRUE

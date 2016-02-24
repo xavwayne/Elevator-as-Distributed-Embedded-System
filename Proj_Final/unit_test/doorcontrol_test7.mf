@@ -1,0 +1,112 @@
+; 18649 <fall-2015>
+; group 3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+; doorcontrol_test7.mf
+
+; This test file is for: S5.4 - S5.1 - S5.2 - S5.3 - S5.5 - S5.2 - S5.6 - S5.1
+; T5.1, T5.2, T5.4, T5.6, T5.7, T5.8, T5.10 are also covered
+; mDriveSpeed ← (s, Stop) tested
+; mCarWeight(g) < MaxCarCapacity and door reversal with over weight tested 
+; mCarWeight(g) <  MaxCarCapacity tested
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+;floor setting up
+0s  I  ONCE N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
+0s  I  ONCE N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 UP FRONT
+
+0s  I  ONCE N HALL_CALL_[3][FRONT][UP]_CAN_ID NewBoolean = true
+;door setting up
+0s  I  ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s  I  ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+;dwell setting up
+0s  I  ONCE N DESIRED_DWELL_[FRONT]_CAN_ID NewInteger = 500
+;drive speed setting up, 1 slow up
+0s  I  ONCE N DRIVE_SPEED_CAN_ID NewInteger = 20
+0s  I  ONCE N DRIVE_COMMAND_CAN_ID DriveCommand = SLOW STOP
+
+;#state 'S5.4 Door Stop While Closed'
+0.21s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSED
+;check door statue
+0.21s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true
+;check the output
+0.21s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+0.21s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#transition 'T5.4'
+0.5s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
+0.5s  I  MESSAGE_PERIOD N DRIVE_SPEED_CAN_ID NewInteger = 0
+
+;#state 'S5.1 Door Open'
+0.81s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+0.81s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+0.81s  A F DoorMotor FRONT LEFT : command == OPEN
+
+;#transition 'T5.1'
+1.2s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+;line below is optional
+1.2s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false 
+
+;#state 'S5.2 Door Stop While Opened'
+1.51s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+1.51s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+1.51s  A F DoorMotor FRONT LEFT : command == STOP
+
+1.90s  I  ONCE N HALL_CALL_[3][FRONT][UP]_CAN_ID Boolean = false
+;#transition 'T5.2'
+
+;#state 'S5.3 Door CLOSE'
+3.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
+;check the output
+3.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == CLOSE_INT
+3.61s  A F DoorMotor FRONT LEFT : command == CLOSE
+
+;#transition 'T5.6'
+3.7s I MESSAGE_PERIOD N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
+;lines below are optional
+3.7s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+3.7s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#state 'S5.1 Door Re Open'
+4.01s  A S DoorControl[FRONT][LEFT] : STATE == STATE_RE_OPEN
+;check the output
+4.01s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+4.01s  A F DoorMotor FRONT LEFT : command == OPEN
+
+;set to the right settings for T5.7
+4.1s  I  MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 10000 ;Prepare for T5.5
+
+;#transition 'T5.7'
+4.1s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+;line below is optional
+4.1s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#state 'S5.2 Door Stop While Opened'
+4.51s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+4.51s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == STOP_INT
+4.51s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#transition 'T5.8', the count of reversal has reached 5
+;#state 'S5.6 Door Nudge'
+8.21s  A S DoorControl[FRONT][LEFT] : STATE == STATE_NUDGE
+;check the output
+8.21s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == NUDGE_INT
+8.21s  A F DoorMotor FRONT LEFT : command == NUDGE
+
+;#transition 'T5.7'
+8.5s  I  MESSAGE_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+;line below is optional
+8.5s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#transition 'T5.10'
+8.5s  I  MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 14000
+
+;#state 'S5.1 Door Open'
+8.81s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+8.81s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+8.81s  A F DoorMotor FRONT LEFT : command == OPEN

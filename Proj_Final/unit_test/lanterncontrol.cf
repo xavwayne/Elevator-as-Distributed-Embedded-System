@@ -1,0 +1,11 @@
+; 18649-Fall-2015
+; Xiao Guo (xiaog) Group 3
+; lanterncontrol.cf
+
+;Introduction:
+; Direction UP
+; with a period of 200 milliseconds
+; verbose option set to TRUE.
+
+LanternControl UP 100ms TRUE
+LanternControl DOWN 100ms TRUE

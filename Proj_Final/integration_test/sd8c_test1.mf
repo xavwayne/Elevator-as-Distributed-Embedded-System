@@ -1,0 +1,32 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+; sd8c_test1.mf
+
+;TODO  add test statements
+
+#INCLUDE defines2.mf ;include CAN ids and period definitions
+
+;initialize
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID  AtFloor 3 FRONT = true    
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+0s  I  MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID SafetySensor = false
+0s  I  MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 100
+0s  I  MESSAGE_PERIOD F DriveSpeed = STOP 0
+
+0.11s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
+0.11s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0.11s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+
+;the car is running between floors
+0.21s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID  AtFloor 3 FRONT = false
+
+;#arc '8C/1'
+0.31s  I  MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID SafetySensor = true
+
+;#arc '8C/2'
+0.41s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+0.41s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP

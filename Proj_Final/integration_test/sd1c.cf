@@ -1,0 +1,16 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd1c.cf
+
+;Introduction:
+; 3th floor,
+; front hallway
+; Front Left door
+; down direction instance 
+; with a period of 100 milliseconds
+; verbose option set to TRUE.
+
+HallButtonControl 3 FRONT DOWN 100ms TRUE
+
+DoorControl FRONT LEFT 100ms TRUE

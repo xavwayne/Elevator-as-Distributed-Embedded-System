@@ -1,0 +1,50 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd9a_test1.mf
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+0s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID  DoorClosed FRONT RIGHT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID  DoorClosed BACK RIGHT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID  DoorClosed BACK LEFT = true
+0s I ONCE N CAR_POSITION_CAN_ID NewInteger = 1
+;default all the mAtFloor are false 
+
+0.40s I ONCE N CAR_CALL_[3][FRONT]_CAN_ID NewBoolean = true
+
+;#arc '9A/1'
+0.61s A S Dispatcher : STATE == STATE_COMPUTE
+0.61s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
+0.61s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
+0.61s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
+0.61s A N DESIRED_DWELL_[BACK]_CAN_ID NewInteger : getValue == 3000
+0.61s A N DESIRED_DWELL_[FRONT]_CAN_ID NewInteger : getValue == 3000
+
+;#arc '9A/2a', #arc '9A/2b', #arc '9A/2c'
+1.00s I ONCE N CAR_POSITION_CAN_ID NewInteger = 3
+1.10s  I  ONCE N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
+1.10s  I  ONCE N DRIVE_SPEED_CAN_ID NewInteger = 0
+
+
+;#arc '9A/3a', #arc '9A/3b'
+;#state 'S5.1 Door Open'
+1.41s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+1.41s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+1.41s  A F DoorMotor FRONT LEFT : command == OPEN
+
+1.80s I ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+1.80s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = false
+
+
+1.90s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+1.90s I ONCE N CAR_POSITION_CAN_ID NewInteger = 3
+
+;#arc '9A/4a', #arc '9A/4b'
+;#state 'S5.2 Door Stop While Opened'
+4.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+4.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID NewInteger : getValue == STOP_INT
+4.61s  A F DoorMotor FRONT LEFT : command == STOP
+

@@ -1,0 +1,82 @@
+; 18649 <Fall-2015>
+; group 3
+; Xiao Guo (xiaog)
+; lanterncontrol_test2.mf
+
+;=================== All door open, test the DOWN lantern ===================
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+;floor setting up
+0s  I  ONCE N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = true
+0s  I  ONCE N DESIRED_FLOOR_CAN_ID DesiredFloor = 1 DOWN FRONT
+;door setting up
+0s  I  ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s  I  ONCE N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+0s  I  ONCE N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s  I  ONCE N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+
+0s  I  ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+0s  I  ONCE N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
+0s  I  ONCE N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = false
+0s  I  ONCE N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = false
+
+;#state 'S7.1 OFF'
+0.21s  A S LanternControl[DOWN] : STATE == STATE_OFF
+0.21s  A S LanternControl[UP] : STATE == STATE_OFF
+;check the output
+0.21s  A N CAR_LANTERN_[DOWN]_CAN_ID  NewBoolean : getValue == false
+0.21s  A F CarLantern DOWN : lighted == false
+
+;#transition 'T7.1'
+;door all open
+0.3s  I  ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+0.3s  I  ONCE N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
+0.3s  I  ONCE N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = false
+0.3s  I  ONCE N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
+
+0.3s  I  ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+0.3s  I  ONCE N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = true
+0.3s  I  ONCE N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = true
+0.3s  I  ONCE N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = true
+
+;#state 'S7.2 ON'
+0.61s  A S LanternControl[DOWN] : STATE == STATE_ON
+0.61s  A S LanternControl[UP] : STATE == STATE_OFF
+;check the output
+0.61s  A N CAR_LANTERN_[DOWN]_CAN_ID  NewBoolean : getValue == true
+0.61s  A F CarLantern DOWN : lighted == true
+
+;=================== Only one door left, test the UP Lantern ===================
+
+;door one open
+0.7s  I  ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0.7s  I  ONCE N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+0.7s  I  ONCE N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0.7s  I  ONCE N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
+
+0.7s  I  ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+0.7s  I  ONCE N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = false
+0.7s  I  ONCE N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = false
+0.7s  I  ONCE N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = true
+
+;#state 'S7.2 ON'
+0.91s  A S LanternControl[DOWN] : STATE == STATE_ON
+0.91s  A S LanternControl[UP] : STATE == STATE_OFF
+;check the output
+0.91s  A N CAR_LANTERN_[DOWN]_CAN_ID  NewBoolean : getValue == true
+0.91s  A F CarLantern DOWN : lighted == true
+
+;=================== Get the destination floor ===================
+;#transition 'T7.2'
+1s  I  ONCE N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = false
+1s  I  ONCE N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = true
+1s  I  ONCE N DESIRED_FLOOR_CAN_ID DesiredFloor = 1 STOP FRONT
+
+;#state 'S7.1 OFF'
+1.31s  A S LanternControl[UP] : STATE == STATE_OFF
+1.31s  A S LanternControl[DOWN] : STATE == STATE_OFF
+;check the output
+1.31s  A N CAR_LANTERN_[DOWN]_CAN_ID  NewBoolean : getValue == false
+1.31s  A F CarLantern DOWN : lighted == false

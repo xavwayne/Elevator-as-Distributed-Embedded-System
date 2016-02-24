@@ -1,0 +1,39 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+
+Simulator Parameters:
+Command line = -cf sd4a.cf -mf sd4a_test1.mf
+RandomSeed = 1449377549517
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd4a_test1.mf
+Controller File = sd4a.cf
+
+Assertion Results:
+@0.31s:  PASSED CarButtonControl[1][FRONT]::checkState(STATE) ?== STATE_LIGHT_ON PASSED
+@0.31s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@3764951d :: lighted ?== true PASSED
+@0.31s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4d7e1886 :: getValue ?== true PASSED
+@0.71s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
+@0.71s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7440e464 :: getValue ?== 0 PASSED
+@0.71s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@78308db1 :: command ?== OPEN PASSED
+@1.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5451c3a8 :: getValue ?== false PASSED
+@1.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5a07e868 :: getValue ?== false PASSED
+@1.21s:  PASSED Dispatcher::checkState(STATE) ?== STATE_COMPUTE PASSED
+@1.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3fee733d :: getDirection ?== STOP PASSED
+@1.31s:  PASSED LanternControl[UP]::checkState(STATE) ?== STATE_OFF PASSED
+@1.31s:  PASSED LanternControl[DOWN]::checkState(STATE) ?== STATE_OFF PASSED
+@1.41s:  PASSED CarButtonControl[1][FRONT]::checkState(STATE) ?== STATE_LIGHT_OFF PASSED
+@1.41s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@5ca881b5 :: lighted ?== false PASSED
+@3.61s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPEN PASSED
+@3.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@372f7a8d :: getValue ?== 2 PASSED
+@3.61s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@28a418fc :: command ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  17
+Failed:  0
+Total :  17
+

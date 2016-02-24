@@ -1,0 +1,24 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+
+SD1A   sd1a.cf  sd1a_test1.mf
+SD1B   sd1b.cf  sd1b_test1.mf
+SD1C   sd1c.cf  sd1c_test1.mf
+SD2A   sd2a.cf	sd2a_test2.mf
+SD2B   sd2b.cf	sd2b_test2.mf
+SD3A   sd3a.cf	sd3a_test1.mf
+SD3B   sd3b.cf	sd3b_test1.mf
+SD4A   sd4a.cf	sd4a_test1.mf
+SD5A   sd5a.cf	sd5a_test2.mf
+SD5B   sd5b.cf	sd5b_test2.mf
+SD6A   sd6a.cf	sd6a_test1.mf
+SD7A   sd7a.cf	sd7a_test1.mf
+SD7B   sd7b.cf	sd7b_test1.mf
+SD7C   sd7c.cf	sd7c_test1.mf
+SD8A   sd8a.cf	sd8a_test1.mf
+SD8B   sd8b.cf	sd8b_test1.mf
+SD8C   sd8c.cf	sd8c_test1.mf
+SD8D   sd8d.cf	sd8d_test1.mf
+SD9A   sd9a.cf	sd9a_test1.mf
+

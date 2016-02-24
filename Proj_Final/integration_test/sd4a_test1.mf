@@ -1,0 +1,66 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd4a_test1.mf
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+0s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID  DoorClosed FRONT RIGHT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID  DoorClosed BACK RIGHT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID  DoorClosed BACK LEFT = true
+
+0s I  ONCE N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
+0s I  ONCE N DRIVE_COMMAND_CAN_ID DriveCommand = FAST UP
+;drive speed setting up, 1 slow up
+0s  I  ONCE N DRIVE_SPEED_CAN_ID NewInteger = 20
+
+0s I ONCE F CarCall 1 FRONT = true
+
+;check the initial state
+;#state 'S9.1 STATE_LIGHT_ON'
+0.31s  A S CarButtonControl[1][FRONT] : STATE == STATE_LIGHT_ON
+0.31s  A F CarLight 1 FRONT : lighted == true
+0.31s  A N CAR_CALL_[1][FRONT]_CAN_ID  NewBoolean : getValue == true
+
+;#arc '4A/1a', #arc '4A/1b', #arc '4A/2'
+0.40s I  ONCE N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = true
+0.40s I  ONCE N DRIVE_SPEED_CAN_ID NewInteger = 0
+0.40s I ONCE F CarCall 1 FRONT = false
+
+;#arc '4A/3a'
+;#state 'S5.1 Door Open'
+0.71s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+0.71s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+0.71s  A F DoorMotor FRONT LEFT : command == OPEN
+
+;#arc '4A/3b', ;#arc '4A/3d'
+0.80s I ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+0.80s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = false
+
+
+;#state 'S9.1 STATE_COMPUTE'
+;#arc '4A/3c'
+1.21s  A N CAR_LIGHT_[1][FRONT]_CAN_ID NewBoolean : getValue == false
+1.21s  A N CAR_CALL_[1][FRONT]_CAN_ID  NewBoolean : getValue == false
+
+1.21s A S Dispatcher : STATE == STATE_COMPUTE
+;#arc '4A/4a'
+1.21s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
+
+;#arc '4A/4b'
+1.31s  A S LanternControl[UP] : STATE == STATE_OFF
+1.31s  A S LanternControl[DOWN] : STATE == STATE_OFF
+
+1.41s  A S CarButtonControl[1][FRONT] : STATE == STATE_LIGHT_OFF
+1.41s  A F CarLight 1 FRONT : lighted == false
+
+;#arc '4A/5a', #arc '4A/5b'
+;#state 'S5.2 Door Stop While Opened'
+3.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+3.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID NewInteger : getValue == STOP_INT
+3.61s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#arc '4A/6'
+;Passenger

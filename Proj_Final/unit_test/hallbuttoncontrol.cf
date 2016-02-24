@@ -1,0 +1,13 @@
+; 18649 <fall-2015>
+; group 3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+; hallbuttoncontrol.cf 
+
+;Introduction:
+; 4th floor,
+; front hallway
+; down direction instance 
+; with a period of 100 milliseconds
+; verbose option set to TRUE.
+
+HallButtonControl 4 FRONT DOWN 100ms TRUE

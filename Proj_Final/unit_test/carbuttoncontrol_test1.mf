@@ -1,0 +1,47 @@
+; 18649 <fall-2015>
+; group 3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+; carbuttoncontrol_test1.mf
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+;no car call for 3rd floor
+;0s  I  0s F CarCall 3 FRONT  = false            
+;door closed  
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = true
+;not at the third floor  
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID  AtFloor 3 FRONT = false     
+
+;#state 'S9.2 STATE_LIGHT_OFF'
+0.21s  A S CarButtonControl[3][FRONT] : STATE == STATE_LIGHT_OFF
+0.21s  A F CarLight 3 FRONT : lighted == false
+0.21s  A N CAR_LIGHT_[3][FRONT]_CAN_ID Boolean : getValue == false
+0.21s  A N AT_FLOOR_[3][FRONT]_CAN_ID  Boolean : getValue == false
+0.21s A N CAR_CALL_[3][FRONT]_CAN_ID  Boolean : getValue == false
+
+;#transition 'T9.2'
+0.80s I ONCE F CarCall 3 FRONT = true
+1.00s I ONCE F CarCall 3 FRONT = false
+
+;#state 'S9.1 STATE_LIGHT_ON'
+1.21s A S CarButtonControl[3][FRONT] : STATE == STATE_LIGHT_ON
+1.21s A F CarLight 3 FRONT : lighted == true
+1.21s A N CAR_LIGHT_[3][FRONT]_CAN_ID Boolean : getValue == true
+1.21s A N CAR_CALL_[3][FRONT]_CAN_ID  Boolean : getValue == true
+
+
+;cancel the car call.
+;1.40s I ONCE F CarCall 3 FRONT = false
+
+
+;#transition 'T9.1'
+2.00s I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+2.00s I MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true 
+
+
+;#state 'S9.2 STATE_LIGHT_OFF'
+2.41s A S CarButtonControl[3][FRONT] : STATE == STATE_LIGHT_OFF
+2.41s A F CarLight 3 FRONT : lighted == false
+2.41s A N CAR_LIGHT_[3][FRONT]_CAN_ID Boolean : getValue == false
+2.41s A N CAR_CALL_[3][FRONT]_CAN_ID  Boolean : getValue == false

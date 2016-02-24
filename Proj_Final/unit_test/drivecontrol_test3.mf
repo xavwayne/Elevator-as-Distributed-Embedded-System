@@ -1,0 +1,58 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+; drivecontrol_test3.mf
+
+;TODO  add test statements
+
+#INCLUDE defines2.mf ;include CAN ids and period definitions
+
+;initialize
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID  AtFloor 4 FRONT = true    
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+0s  I  MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID SafetySensor = false
+0s  I  MESSAGE_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 100
+0s  I  MESSAGE_PERIOD F DriveSpeed = STOP 0
+
+;check state S6.1
+;#state 'S6.1 STOP'
+0.21s A S DriveControl : STATE == STATE_STOP
+0.21s A  F Drive : speed == STOP
+0.21s A  F Drive : direction == STOP
+0.21s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+0.21s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
+0.21s A  N DRIVE_SPEED_CAN_ID NewInteger : getValue == 0
+
+;set for T6.4
+;#transition 'T6.4'
+0.41s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 3 FRONT DOWN
+0.41s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0.41s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+
+;check state S6.3
+;#state 'S6.3 SLOW_DOWN'
+0.51s A S DriveControl : STATE == STATE_SLOW_DOWN
+0.51s A  F Drive : speed == SLOW
+0.51s A  F Drive : direction == DOWN
+0.51s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
+0.51s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
+0.51s A  N DRIVE_SPEED_CAN_ID NewInteger : getValue >= 0
+
+;the car has already left floor 4
+0.55s  I  MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID  AtFloor 4 FRONT = false
+
+;set for T6.10
+;#transition 'T6.10'
+0.61s  I  MESSAGE_PERIOD N EMERGENCY_BRAKE_CAN_ID SafetySensor = true
+
+;check state S6.4
+;#state 'S6.4 EMERGENCY'
+0.71s A S DriveControl : STATE == STATE_EMERGENCY
+0.71s A  F Drive : speed == STOP
+0.71s A  F Drive : direction == STOP
+0.71s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+0.71s A  N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
+0.71s A  N DRIVE_SPEED_CAN_ID NewInteger : getValue == 0

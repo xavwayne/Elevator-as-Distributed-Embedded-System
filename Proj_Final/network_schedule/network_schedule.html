@@ -1,0 +1,1185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252"
+      http-equiv="Content-Type">
+    <title>18649 - Network Schedule</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">18649 - Network Schedule<br>
+    </h1>
+    <hr style="width: 100%; height: 2px;">18649 &lt;fall-2015&gt;<br>
+    Group 3 - Jiyu Shi (jiyus)&nbsp;&amp;nb`sp;&nbsp; Shuai
+    Wang(shuaiwa1)&nbsp;&nbsp;&nbsp; Xiaoyu
+    Wang(xiaoyuw)&nbsp;&nbsp;&nbsp; Xiao Guo(xiaog)
+    <hr style="width: 100%; height: 2px;">
+    <h2>CAN Message Dictionary<br>
+    </h2>
+    There shows all the CAN Message that are used in our Elevator. This
+    is the copy table of Message Dictionary Table.<br>
+    <br>
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top"><b>Sender Node Name</b><b><br>
+            </b></td>
+          <td valign="top"><b>Message Name</b><b><br>
+            </b></td>
+          <td valign="top"><b>Deadline(ms)</b><b><br>
+            </b></td>
+          <td valign="top"><b>Message ID</b><b><br>
+            </b></td>
+          <td valign="top"><b>Sender Node Type</b><b><br>
+            </b></td>
+          <td valign="top"><b>Replication Type</b><b><br>
+            </b></td>
+          <td valign="top"><b>Base CAN ID</b><b><br>
+            </b></td>
+        </tr>
+        <tr>
+          <td valign="top">Level Sensor<br>
+          </td>
+          <td valign="top">Level_Sensor(Leveling_Base)<br>
+          </td>
+          <td valign="top">10 </td>
+          <td valign="top">744<br>
+          </td>
+          <td valign="top">20<br>
+          </td>
+          <td valign="top">direction<br>
+          </td>
+          <td valign="top">0x0AE81400<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Control<br>
+          </td>
+          <td valign="top">Door_Motor_Command(Door_Motor_Command_Base)<br>
+          </td>
+          <td valign="top">10 </td>
+          <td valign="top">786<br>
+          </td>
+          <td valign="top">184<br>
+          </td>
+          <td valign="top">hall, side<br>
+          </td>
+          <td valign="top">0x0B12B800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Reversal Sensor<br>
+          </td>
+          <td valign="top">Door_Reversal_Sensor(Door_Reversal_Sensor_Base)<br>
+          </td>
+          <td valign="top">10 </td>
+          <td valign="top">740<br>
+          </td>
+          <td valign="top">100<br>
+          </td>
+          <td valign="top">hall, side<br>
+          </td>
+          <td valign="top">0x0AE46400<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Drive Control<br>
+          </td>
+          <td valign="top">Drive_Speed<br>
+          </td>
+          <td valign="top">10 </td>
+          <td valign="top">701<br>
+          </td>
+          <td valign="top">181<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0ABDB500<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Drive Control<br>
+          </td>
+          <td valign="top">Drive_Command<br>
+          </td>
+          <td valign="top">10 </td>
+          <td valign="top">702<br>
+          </td>
+          <td valign="top">181<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0ABEB500<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Safety Sensor<br>
+          </td>
+          <td valign="top">Emergency_Brake<br>
+          </td>
+          <td valign="top">50<br>
+          </td>
+          <td valign="top">1000<br>
+          </td>
+          <td valign="top">20<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0BE81400<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">At Floor Sensor<br>
+          </td>
+          <td valign="top">At_Floor(At_Floor_Base)<br>
+          </td>
+          <td valign="top">50 </td>
+          <td valign="top">1100<br>
+          </td>
+          <td valign="top">40<br>
+          </td>
+          <td valign="top">floor, hall<br>
+          </td>
+          <td valign="top">0x0C4C2800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Car Level Position Sensor<br>
+          </td>
+          <td valign="top">Car_Level_Position<br>
+          </td>
+          <td valign="top">50 </td>
+          <td valign="top">1200<br>
+          </td>
+          <td valign="top">60<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0CB03C00<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Dispatcher<br>
+          </td>
+          <td valign="top">Desired_Dwell(Desired_Dwell_Base)<br>
+          </td>
+          <td valign="top">50 </td>
+          <td valign="top">1300<br>
+          </td>
+          <td valign="top">182<br>
+          </td>
+          <td valign="top">hallway<br>
+          </td>
+          <td valign="top">0x0D14B600<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Dispatcher<br>
+          </td>
+          <td valign="top">Desired_Floor<br>
+          </td>
+          <td valign="top">50 </td>
+          <td valign="top">1400<br>
+          </td>
+          <td valign="top">182<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0D78B600<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Car Position Control<br>
+          </td>
+          <td valign="top">Car_Position<br>
+          </td>
+          <td valign="top">50 </td>
+          <td valign="top">1500<br>
+          </td>
+          <td valign="top">183<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0DDCB700<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Closed Sensor<br>
+          </td>
+          <td valign="top">Door_Closed_Sensor(Door_Closed_Base)<br>
+          </td>
+          <td valign="top">100<br>
+          </td>
+          <td valign="top">1600<br>
+          </td>
+          <td valign="top">80<br>
+          </td>
+          <td valign="top">hall, side<br>
+          </td>
+          <td valign="top">0x0E405000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Hall Button<br>
+          </td>
+          <td valign="top">Hall_Call(Hall_Call_Base)<br>
+          </td>
+          <td valign="top">100 </td>
+          <td valign="top">1650<br>
+          </td>
+          <td valign="top">185<br>
+          </td>
+          <td valign="top">floor, hall, side<br>
+          </td>
+          <td valign="top">0x0E72B900<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Car Button<br>
+          </td>
+          <td valign="top">Car_Call(Car_Call_Base)</td>
+          <td valign="top">100 </td>
+          <td valign="top">1700<br>
+          </td>
+          <td valign="top">186<br>
+          </td>
+          <td valign="top">floor, hall </td>
+          <td valign="top">0x0EA4BA00<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Weight Sensor<br>
+          </td>
+          <td valign="top">Car_Weight<br>
+          </td>
+          <td valign="top">200<br>
+          </td>
+          <td valign="top">1750<br>
+          </td>
+          <td valign="top">120<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0ED67800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Weight Sensor<br>
+          </td>
+          <td valign="top">Car_Weight_Alarm<br>
+          </td>
+          <td valign="top">200 </td>
+          <td valign="top">1800<br>
+          </td>
+          <td valign="top">140<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0F088C00<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Opened Sensor<br>
+          </td>
+          <td valign="top">Door_Opened_Sensor(Door_Opened_Sensor_Base)<br>
+          </td>
+          <td valign="top">200 </td>
+          <td valign="top">1850<br>
+          </td>
+          <td valign="top">160<br>
+          </td>
+          <td valign="top">hall, side<br>
+          </td>
+          <td valign="top">0x0F3AA000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Hoistway Limit Sensor<br>
+          </td>
+          <td valign="top">Hoistway_Limit(Hoistway_Limit_Base)<br>
+          </td>
+          <td valign="top">200 </td>
+          <td valign="top">1900<br>
+          </td>
+          <td valign="top">180<br>
+          </td>
+          <td valign="top">direction<br>
+          </td>
+          <td valign="top">0x0F6CB400<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Lantern Control<br>
+          </td>
+          <td valign="top">Car_Lantern(Car_Lantern_Base)<br>
+          </td>
+          <td valign="top">200 </td>
+          <td valign="top">1950<br>
+          </td>
+          <td valign="top">187<br>
+          </td>
+          <td valign="top">direction<br>
+          </td>
+          <td valign="top">0x0F9EBB00<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <h2>Network Schedule Analaysis</h2>
+    There shows schedule analysis in our Elevator. This is the copy
+    table of Network Schedule Analysis table.<br>
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top"><b><br>
+            </b> </td>
+          <td valign="top"><b><br>
+            </b> </td>
+          <td valign="top"><b><br>
+            </b> </td>
+          <td valign="top"><b><br>
+            </b> </td>
+          <td valign="top"><b><br>
+            </b> </td>
+          <td colspan="3" rowspan="1" align="center" bgcolor="#ffff66"
+            valign="top"><b>Field1</b><b><br>
+            </b> </td>
+          <td colspan="3" rowspan="1" align="center" valign="top"><b>Field2</b></td>
+          <td colspan="3" rowspan="1" align="center" bgcolor="#ffff66"
+            valign="top"><b>Field3</b></td>
+          <td colspan="1" rowspan="2" valign="top"><b>Total </b><b><br>
+            </b><b> Payload </b><b><br>
+            </b><b> Bit Len</b><b><br>
+            </b> </td>
+          <td colspan="1" rowspan="2" valign="top"><b>Total </b><b><br>
+            </b><b> Payload </b><b><br>
+            </b><b> Byte Len</b><b><br>
+            </b> </td>
+          <td colspan="1" rowspan="2" bgcolor="#ffff66" valign="top"><b>Best
+
+
+
+
+
+
+
+
+
+              Case</b><b><br>
+            </b><b> Msg Len</b><b><br>
+            </b> </td>
+          <td colspan="1" rowspan="2" bgcolor="#ffff66" valign="top"><b>Worst
+
+
+
+
+
+
+
+
+
+              Case</b><b><br>
+            </b><b> Msg Len</b><b><br>
+            </b> </td>
+          <td colspan="1" rowspan="2" bgcolor="#ffff66" valign="top"><b>Best
+
+
+
+
+
+
+
+
+
+            </b><b><br>
+            </b><b> Case BW</b><b><br>
+            </b><b> (bits/sec)</b><b><br>
+            </b> </td>
+          <td colspan="1" rowspan="2" bgcolor="#ffff66" valign="top"><b>Worst
+
+
+
+
+
+
+
+
+
+            </b><b><br>
+            </b><b> Case BW</b><b><br>
+            </b><b> (bits/sec)</b></td>
+        </tr>
+        <tr>
+          <td valign="top"><b>Sender Node Name</b><b><br>
+            </b> </td>
+          <td valign="top"><b>Message Name</b><b><br>
+            </b> </td>
+          <td valign="top"><b>Base CAN ID</b><b><br>
+            </b> </td>
+          <td valign="top"><b>Replication Count</b><b><br>
+            </b> </td>
+          <td valign="top"><b>Deadline(ms)</b><b><br>
+            </b> </td>
+          <td bgcolor="#ffff66" valign="top"><b>Desc</b><b><br>
+            </b> </td>
+          <td bgcolor="#ffff66" valign="top"><b>Type</b><b><br>
+            </b> </td>
+          <td bgcolor="#ffff66" valign="top"><b>Bit Len</b><b><br>
+            </b> </td>
+          <td valign="top"><b>Desc</b><b><br>
+            </b> </td>
+          <td valign="top"><b>Type</b><b><br>
+            </b> </td>
+          <td valign="top"><b>Bit Len</b><b><br>
+            </b> </td>
+          <td bgcolor="#ffff66" valign="top"><b>Desc</b><b><br>
+            </b> </td>
+          <td bgcolor="#ffff66" valign="top"><b>Type </b><b><br>
+            </b> </td>
+          <td bgcolor="#ffff66" valign="top"><b>Bit Len</b><b><br>
+            </b> </td>
+        </tr>
+        <tr>
+          <td valign="top">Level Sensor</td>
+          <td valign="top">Level_Sensor(Leveling_Base)</td>
+          <td valign="top">0x0AE81400<br>
+          </td>
+          <td valign="top">2<br>
+          </td>
+          <td valign="top">10<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">Car leveling<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">90<br>
+          </td>
+          <td valign="top">15000<br>
+          </td>
+          <td valign="top">18000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Control</td>
+          <td valign="top">Door_Motor_Command(Door_Motor_Command_Base) </td>
+          <td valign="top">0x0B12B800<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">10 </td>
+          <td bgcolor="#ffff66" valign="top">Current door command<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">2<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">2<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">30000<br>
+          </td>
+          <td valign="top">36000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Reversal Sensor</td>
+          <td valign="top">Door_Reversal_Sensor(Door_Reversal_Sensor_Base)
+
+
+
+
+
+
+          </td>
+          <td valign="top">0x0AE46400<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">10 </td>
+          <td bgcolor="#ffff66" valign="top">Door reversal<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top"> 1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">30000<br>
+          </td>
+          <td valign="top">36000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Drive Control</td>
+          <td valign="top">Drive_Speed </td>
+          <td valign="top">0x0ABDB500<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">10 </td>
+          <td bgcolor="#ffff66" valign="top">Current speed<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int(mm/s)<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">32<br>
+          </td>
+          <td valign="top">n/a<br>
+          </td>
+          <td valign="top">n/a<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">32<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">99<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">120<br>
+          </td>
+          <td valign="top">9900<br>
+          </td>
+          <td valign="top">12000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Drive Control</td>
+          <td valign="top">Drive_Command </td>
+          <td valign="top">0x0ABEB500<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">10 </td>
+          <td bgcolor="#ffff66" valign="top">Commanded speed<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">2<br>
+          </td>
+          <td valign="top">Commanded direction </td>
+          <td valign="top">int<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">2<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">7500<br>
+          </td>
+          <td valign="top">9000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Safety Sensor</td>
+          <td valign="top">Emergency_Brake </td>
+          <td valign="top">0x0BE81400<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">50<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">Ebrake<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">1500<br>
+          </td>
+          <td valign="top">1800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">At Floor Sensor</td>
+          <td valign="top">At_Floor(At_Floor_Base) </td>
+          <td valign="top">0x0C4C2800<br>
+          </td>
+          <td valign="top">10<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">50 </td>
+          <td bgcolor="#ffff66" valign="top">Floor proximity<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">15000<br>
+          </td>
+          <td valign="top">18000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Car Level Position Sensor</td>
+          <td valign="top">Car_Level_Position </td>
+          <td valign="top">0x0CB03C00<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">50 </td>
+          <td bgcolor="#ffff66" valign="top">Car position<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int(mm)<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">32<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">32<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">99<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">120<br>
+          </td>
+          <td valign="top">1980<br>
+          </td>
+          <td valign="top">2400<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Dispatcher</td>
+          <td valign="top">Desired_Dwell(Desired_Dwell_Base) </td>
+          <td valign="top">0x0D14B600<br>
+          </td>
+          <td valign="top">2<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">50 </td>
+          <td bgcolor="#ffff66" valign="top">Desired dwell time<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">32<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">32<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">99<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">120<br>
+          </td>
+          <td valign="top">3960<br>
+          </td>
+          <td valign="top">4800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Dispatcher</td>
+          <td valign="top">Desired_Floor </td>
+          <td valign="top">0x0D78B600<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">50 </td>
+          <td bgcolor="#ffff66" valign="top">Desired floor<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">4<br>
+          </td>
+          <td valign="top">Desired direction<br>
+          </td>
+          <td valign="top">int </td>
+          <td bgcolor="#ffffff" valign="top">2<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">Desired hallway<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int </td>
+          <td bgcolor="#ffff66" valign="top">2<br>
+          </td>
+          <td valign="top">8<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">1500<br>
+          </td>
+          <td valign="top">1800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Car Position Control</td>
+          <td valign="top">Car_Position </td>
+          <td valign="top">0x0DDCB700<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">50 </td>
+          <td bgcolor="#ffff66" valign="top">Floor<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">4<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">99<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">120<br>
+          </td>
+          <td valign="top">1980<br>
+          </td>
+          <td valign="top">2400<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Closed Sensor</td>
+          <td valign="top">Door_Closed_Sensor(Door_Closed_Base) </td>
+          <td valign="top">0x0E405000<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">100<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">Door closed switches<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">3000<br>
+          </td>
+          <td valign="top">3600<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Hall Button </td>
+          <td valign="top">Hall_Call(Hall_Call_Base) </td>
+          <td valign="top">0x0E72B900<br>
+          </td>
+          <td valign="top">17<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">100 </td>
+          <td bgcolor="#ffff66" valign="top">Presence of a hall call<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">12750<br>
+          </td>
+          <td valign="top">15300<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Car Button </td>
+          <td valign="top">Car_Call(Car_Call_Base) </td>
+          <td valign="top">0x0EA4BA00<br>
+          </td>
+          <td valign="top">10<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">100 </td>
+          <td bgcolor="#ffff66" valign="top">Presence of a car call<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">7500<br>
+          </td>
+          <td valign="top">9000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Weight Sensor </td>
+          <td valign="top">Car_Weight </td>
+          <td valign="top">0x0ED67800<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">200<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">Car weight<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">int<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">16<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">16<br>
+          </td>
+          <td valign="top">2<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">83<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">100<br>
+          </td>
+          <td valign="top">415<br>
+          </td>
+          <td valign="top">500<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Weight Sensor </td>
+          <td valign="top">Car_Weight_Alarm </td>
+          <td valign="top">0x0F088C00<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">200 </td>
+          <td bgcolor="#ffff66" valign="top">Car weight alarm<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">375<br>
+          </td>
+          <td valign="top">450<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Opened Sensor </td>
+          <td valign="top">Door_Opened_Sensor(Door_Opened_Sensor_Base) </td>
+          <td valign="top">0x0F3AA000<br>
+          </td>
+          <td valign="top">4<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">200 </td>
+          <td bgcolor="#ffff66" valign="top">Door opened switches<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">1500<br>
+          </td>
+          <td valign="top">1800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Hoistway Limit Sensor </td>
+          <td valign="top">Hoistway_Limit(Hoistway_Limit_Base) </td>
+          <td valign="top">0x0F6CB400<br>
+          </td>
+          <td valign="top">2<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">200 </td>
+          <td bgcolor="#ffff66" valign="top">Safety hoistway limit<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">750<br>
+          </td>
+          <td valign="top">900<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Lantern Control </td>
+          <td valign="top">Car_Lantern(Car_Lantern_Base) </td>
+          <td valign="top">0x0F9EBB00<br>
+          </td>
+          <td valign="top">2<br>
+          </td>
+          <td bgcolor="#ffffff" valign="top">200 </td>
+          <td bgcolor="#ffff66" valign="top">Car lantern<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">boolean </td>
+          <td bgcolor="#ffff66" valign="top">1<br>
+          </td>
+          <td valign="top">n/a </td>
+          <td valign="top">n/a </td>
+          <td bgcolor="#ffffff" valign="top">0<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">n/a </td>
+          <td bgcolor="#ffff66" valign="top">0<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td valign="top">1<br>
+          </td>
+          <td bgcolor="#ffff66" valign="top">75 </td>
+          <td bgcolor="#ffff66" valign="top">90 </td>
+          <td valign="top">750<br>
+          </td>
+          <td valign="top">900<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#33ff33" valign="top">Total Bw<br>
+          </td>
+          <td bgcolor="#33ff33" valign="top">145,360<br>
+          </td>
+          <td bgcolor="#33ff33" valign="top">174,650<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    There is the link to our Excel schedule file:<br>
+    <a href="network-schedule-template.xls">network-schedule-template.xls</a><br>
+    <br>
+    <h2>Simulation Analysis</h2>
+    1.<br>
+    Running the simulation with bandwidth of 200kbps, we obtain the
+    results listed below.&nbsp; Multiplying the network bandwidth by the
+    utilization gives us the actual bandwidth used:<br>
+    &nbsp; 200000 * 76.49 % =&nbsp; 152,980 bps<br>
+    This is between the best- and worst-case values predicted by our
+    analysis.<br>
+    <br>
+    Simulator Parameters:<br>
+    Command line = -gui -pf proj7acceptance4.pass -b 200<br>
+    RandomSeed = 1447879559515<br>
+    CanNetworkBitTime = 5000 ns<br>
+    Effective Can Bitrate = 199999.99999999997<br>
+    Run Time = null<br>
+    Real time rate = null<br>
+    Acceptance Test File = proj7acceptance4.pass<br>
+    <br>
+    Passenger Delivery Summary<br>
+    Delivered: 63<br>
+    Stranded: 0<br>
+    Total: 63<br>
+    <br>
+    Deliver Stats (lower is better):<br>
+    Average_delivery_time: 102.877<br>
+    Maximum_delivery_time:&nbsp; 254.460<br>
+    Delivery_performance_score:&nbsp; 665.967<br>
+    <br>
+    Satisfaction Stats (higher is better):<br>
+    Average_satisfaction_score: 99.683<br>
+    Min_satisfaction_score:&nbsp; 80.000<br>
+    Satisfaction_performance_score:&nbsp; 478.730<br>
+    <br>
+    Network Utilization Summary:<br>
+    Recent: 76.49 % Max: 76.49 %&nbsp; Overall:&nbsp; 76.49 %<br>
+    <br>
+    2.<br>
+    Stuff bit might increase the total number of bits per seconds to
+    send. The fact that clock drift means that if there are no edges,
+    receivers will lose track of bits. Also, periodic edges allow
+    receiver to resynchronize to sender clock. So one of solution is to
+    add stuff bits. Stuff bits are extra bits added to force transitions
+    regardless of data. In best case, we don't need stuff bits. But int
+    worse case, we need to add an opposite-valued stuff bit after every
+    5 identical bits.<br>
+    <br>
+  </body>
+</html>

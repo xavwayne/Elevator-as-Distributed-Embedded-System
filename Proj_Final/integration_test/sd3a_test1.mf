@@ -1,0 +1,71 @@
+; 18649 <fall-2015>
+; group 3 
+; Jiyu Shi (jiyus)    Shuai Wang(shuaiwa1)    Xiaoyu Wang(xiaoyuw)    Xiao Guo(xiaog)
+; sd3a_test1.mf
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+0s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID  DoorClosed FRONT RIGHT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID  DoorClosed BACK RIGHT = true
+0s I ONCE N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID  DoorClosed BACK LEFT = true
+0s I ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+
+0s I  ONCE N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
+0s I  ONCE N DRIVE_COMMAND_CAN_ID DriveCommand = FAST UP
+0s I  ONCE F HallCall 1 FRONT UP = true
+
+;drive speed setting up, 1 slow up
+0s  I  ONCE N DRIVE_SPEED_CAN_ID NewInteger = 20
+
+;check the initial state
+0.31s A S HallButtonControl[1][FRONT][UP] : STATE == STATE_HALL_LIGHT_ON
+0.31s A F HallLight 1 FRONT UP : lighted == true
+
+
+;#arc '3A/1a', #arc '3A/1b'
+0.40s  I  ONCE N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = true
+0.40s  I  ONCE N DRIVE_SPEED_CAN_ID NewInteger = 0
+0.40s  I  ONCE F HallCall 1 FRONT UP = false
+
+;#state 'S5.1 Door Open'
+0.71s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+;check the output
+0.71s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getValue == OPEN_INT
+0.71s  A F DoorMotor FRONT LEFT : command == OPEN
+
+0.80s I ONCE N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+0.80s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID  DoorClosed FRONT LEFT = false
+
+;#arc '3A/2'
+;1.31s A N HALL_LIGHT_[1][FRONT][UP]_CAN_ID NewBoolean : getValue == false
+1.31s A F HallLight 1 FRONT UP : lighted == false
+
+;#arc '3A/3' Inside Controller
+
+;Trigger the dispatcher
+1.40s I ONCE N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+1.40s I ONCE N CAR_POSITION_CAN_ID NewInteger = 1
+1.40s I ONCE N CAR_CALL_[3][FRONT]_CAN_ID NewBoolean = true
+
+;#state 'S9.1 STATE_COMPUTE'
+1.71s A S Dispatcher : STATE == STATE_COMPUTE
+;#arc '3A/4a'
+1.71s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
+1.71s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
+1.71s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
+1.71s A N DESIRED_DWELL_[BACK]_CAN_ID NewInteger : getValue == 3000
+1.71s A N DESIRED_DWELL_[FRONT]_CAN_ID NewInteger : getValue == 3000
+
+;#arc '3A/4b'
+1.71s  A S LanternControl[UP] : STATE == STATE_OFF
+1.71s  A S LanternControl[DOWN] : STATE == STATE_OFF
+
+;#arc '3A/5a', arc '3A/5b'
+;#state 'S5.2 Door Stop While Opened'
+3.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPEN
+;check the output
+3.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID NewInteger : getValue == STOP_INT
+3.61s  A F DoorMotor FRONT LEFT : command == STOP
+
+;#arc '3A/6' Passenger

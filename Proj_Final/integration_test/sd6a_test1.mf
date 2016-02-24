@@ -1,0 +1,37 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+; sd6a_test1.mf
+
+;TODO  add test statements
+
+#INCLUDE defines2.mf ;include CAN ids and period definitions
+
+;initiate
+0s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID  AtFloor 3 FRONT = true    
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s  I  MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+0s  I  MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 5 FRONT UP
+
+0.05s  I  MESSAGE_PERIOD N AT_FLOOR_[3][FRONT]_CAN_ID  AtFloor 3 FRONT = false
+
+0.11s I MESSAGE_PERIOD F DriveSpeed = UP 0.25
+
+;#arc '6A/1a'
+0.21s A  F Drive : speed == FAST
+0.21s A  F Drive : direction == UP
+
+;#arc '6A/1b'
+0.31s I MESSAGE_PERIOD F DriveSpeed = UP 1.00
+
+
+
+;#arc '6A/2'
+0.41s  I  MESSAGE_PERIOD N CAR_LEVEL_POSITION_CAN_ID  CarLevelPosition  = 14800
+
+
+;#arc '6A/3a', #arc '6A/3b'
+0.71s A F CarPositionIndicator : floor == 4
+

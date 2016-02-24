@@ -1,0 +1,46 @@
+; 18649 <fall-2015>
+; group #3
+; Jiyu Shi(jiyus) ; Shuai Wang(shuaiwa1); Xiaoyu Wang(xiaoyuw); Xiao Guo(xiaog)
+
+Simulator Parameters:
+Command line = -cf sd7c.cf -mf sd7c_test1.mf
+RandomSeed = 1445465863436
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd7c_test1.mf
+Controller File = sd7c.cf
+
+Assertion Results:
+@0.21s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_CLOSED PASSED
+@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3764951d :: getValue ?== true PASSED
+@0.21s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4d7e1886 :: getValue ?== 2 PASSED
+@0.21s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2f0e140b :: command ?== STOP PASSED
+@0.81s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
+@0.81s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@78308db1 :: getValue ?== 0 PASSED
+@0.81s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5451c3a8 :: command ?== OPEN PASSED
+@1.81s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPEN PASSED
+@1.81s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@76ed5528 :: getValue ?== 2 PASSED
+@1.81s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@3fee733d :: command ?== STOP PASSED
+@2.009999999s:  PASSED LanternControl[UP]::checkState(STATE) ?== STATE_ON PASSED
+@2.009999999s:  PASSED LanternControl[DOWN]::checkState(STATE) ?== STATE_OFF PASSED
+@2.009999999s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7a81197d :: getValue ?== true PASSED
+@2.009999999s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@24d46ca6 :: lighted ?== true PASSED
+@3.61s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_NUDGE PASSED
+@3.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2f92e0f4 :: getValue ?== 3 PASSED
+@3.61s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5305068a :: command ?== NUDGE PASSED
+@4.91s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_CLOSED PASSED
+@4.91s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2ff4acd0 :: getValue ?== true PASSED
+@4.91s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5caf905d :: getValue ?== 2 PASSED
+@4.91s:  PASSED LanternControl[UP]::checkState(STATE) ?== STATE_OFF PASSED
+@4.91s:  PASSED LanternControl[DOWN]::checkState(STATE) ?== STATE_OFF PASSED
+@4.91s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@a09ee92 :: getValue ?== false PASSED
+@4.91s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@452b3a41 :: lighted ?== false PASSED
+
+
+******************Summary******************
+Passed:  24
+Failed:  0
+Total :  24
+
